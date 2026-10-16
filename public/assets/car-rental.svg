@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="650" viewBox="0 0 900 650" fill="none">
+  <title>Car rental project — conceptual cover artwork</title>
+  <desc>An original coral car illustration over a cobalt circle and a simple drawn route on warm grid paper.</desc>
+  <defs>
+    <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse">
+      <path d="M42 0H0V42" stroke="#D8D2C7" stroke-width="1"/>
+    </pattern>
+    <pattern id="hatch" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(40)">
+      <path d="M0 0V9" stroke="#25251F" stroke-width="2"/>
+    </pattern>
+  </defs>
+  <path fill="#EAE5D9" d="M0 0h900v650H0z"/>
+  <path fill="url(#grid)" d="M0 0h900v650H0z" opacity=".6"/>
+  <circle cx="482" cy="308" r="208" fill="#3859D8"/>
+  <path d="M102 221V159a28 28 0 0 1 28-28h120a28 28 0 0 0 28-28V78M551 100h159a35 35 0 0 1 35 35v65a35 35 0 0 0 35 35h44" stroke="#25251F" stroke-width="3" stroke-dasharray="9 8"/>
+  <path d="m799 221 16 14-16 14" stroke="#25251F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <g transform="rotate(-11 136 258)">
+    <path d="M106 235a30 30 0 1 1 60 0c0 22-30 47-30 47s-30-25-30-47Z" fill="#DBEC81" stroke="#25251F" stroke-width="3"/>
+    <circle cx="136" cy="234" r="9" stroke="#25251F" stroke-width="3"/>
+  </g>
+  <path d="M120 509h660" stroke="#25251F" stroke-width="3"/>
+  <path d="M188 532h127m29 0h40m241 0h86" stroke="#25251F" stroke-width="2"/>
+  <ellipse cx="464" cy="486" rx="281" ry="20" fill="#25251F" opacity=".1"/>
+  <path d="m202 363 74-14 68-104a28 28 0 0 1 23-12h162a48 48 0 0 1 37 17l85 100 66 15a28 28 0 0 1 22 27v53a16 16 0 0 1-16 16H194a15 15 0 0 1-15-15v-56a28 28 0 0 1 23-27Z" fill="#F08B75" stroke="#25251F" stroke-width="4" stroke-linejoin="round"/>
+  <path d="m302 348 53-83a16 16 0 0 1 13-7h61v90H302Z" fill="#F6F1E6" stroke="#25251F" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M451 258h74a24 24 0 0 1 19 9l69 81H451v-90Z" fill="#F6F1E6" stroke="#25251F" stroke-width="4" stroke-linejoin="round"/>
+  <path d="m364 274-38 59m51-59-38 59m160-59 50 59" stroke="#D5CEC0" stroke-width="4"/>
+  <path d="M434 369v71m-101-70h29m202 0h29" stroke="#25251F" stroke-width="4" stroke-linecap="round"/>
+  <path d="M183 405h28v22h-28m526-41h29v25h-29" fill="#DBEC81" stroke="#25251F" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M225 443h473" stroke="#25251F" stroke-width="3"/>
+  <path d="M302 398c-38 0-68 29-68 65h136c0-36-30-65-68-65Zm321 0c-38 0-68 29-68 65h136c0-36-30-65-68-65Z" fill="#25251F"/>
+  <circle cx="302" cy="454" r="49" fill="#25251F" stroke="#25251F" stroke-width="4"/>
+  <circle cx="623" cy="454" r="49" fill="#25251F" stroke="#25251F" stroke-width="4"/>
+  <circle cx="302" cy="454" r="27" fill="#F6F1E6" stroke="#25251F" stroke-width="3"/>
+  <circle cx="623" cy="454" r="27" fill="#F6F1E6" stroke="#25251F" stroke-width="3"/>
+  <circle cx="302" cy="454" r="8" fill="#F08B75" stroke="#25251F" stroke-width="3"/>
+  <circle cx="623" cy="454" r="8" fill="#F08B75" stroke="#25251F" stroke-width="3"/>
+  <path d="M179 433h26v28h-26m540-28h28v28h-28" fill="#F6F1E6" stroke="#25251F" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M118 359h46m-60 24h43m-13 25h29" stroke="#25251F" stroke-width="3" stroke-linecap="round"/>
+  <g transform="rotate(12 748 323)">
+    <path d="m748 278 9 29 29-9-20 25 25 20-32-1-1 32-17-27-27 17 11-30-30-11 31-6-6-31 24 22 22-24-8 30Z" fill="#DBEC81" stroke="#25251F" stroke-width="2.5" stroke-linejoin="round"/>
+  </g>
+  <path d="M69 72h32M85 56v32m702 486h32m-16-16v32" stroke="#25251F" stroke-width="2"/>
+  <path d="M57 592h109v11H57z" fill="url(#hatch)"/>
+</svg>
