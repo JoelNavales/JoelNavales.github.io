@@ -1,12 +1,10 @@
-import { useFrame, useThree } from '@react-three/fiber';
+import { useFrame } from '@react-three/fiber';
 import type { ThreeElements } from '@react-three/fiber';
 import { useEffect, useMemo, useRef } from 'react';
 import type { ReactNode, RefObject } from 'react';
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 import { mergeVertices } from 'three/addons/utils/BufferGeometryUtils.js';
-import { projects } from '../../data';
-import { blankScreen, drawScreen, SCREEN_HEIGHT, SCREEN_WIDTH } from './phoneScreen';
 import type { HeroObject } from './types';
 
 // The palette of the project cover illustrations, so the 3D pieces read as the same drawings.
@@ -94,6 +92,28 @@ function slab(width: number, height: number, radius: number, depth: number, beve
   }).center();
 }
 
+// A single curved shell gives the controller its two distinctive hand grips.
+function controllerShell() {
+  const shape = new THREE.Shape();
+  shape.moveTo(-0.5, 0.4);
+  shape.lineTo(0.5, 0.4);
+  shape.bezierCurveTo(0.73, 0.4, 0.8, 0.2, 0.87, -0.37);
+  shape.bezierCurveTo(0.93, -0.72, 0.67, -0.78, 0.51, -0.51);
+  shape.lineTo(0.32, -0.24);
+  shape.quadraticCurveTo(0, -0.12, -0.32, -0.24);
+  shape.lineTo(-0.51, -0.51);
+  shape.bezierCurveTo(-0.67, -0.78, -0.93, -0.72, -0.87, -0.37);
+  shape.bezierCurveTo(-0.8, 0.2, -0.73, 0.4, -0.5, 0.4);
+  return new THREE.ExtrudeGeometry(shape, {
+    depth: 0.22,
+    bevelEnabled: true,
+    bevelThickness: 0.07,
+    bevelSize: 0.055,
+    bevelSegments: 4,
+    curveSegments: 16,
+  }).translate(0, 0, -0.11);
+}
+
 const kingProfile = [
   [0, 0],
   [0.46, 0],
@@ -117,11 +137,15 @@ const kingProfile = [
 ].map(([x, y]) => new THREE.Vector2(x, y));
 
 const shapes = {
-  phone: slab(0.9, 1.84, 0.14, 0.08, 0.02),
-  screen: new THREE.PlaneGeometry(0.8, 1.72),
-  phoneButton: new RoundedBoxGeometry(0.03, 0.26, 0.05, 2, 0.012),
-  phoneBump: slab(0.36, 0.36, 0.09, 0.03, 0.01),
-  phoneLens: new THREE.CylinderGeometry(0.065, 0.065, 0.03, 24).rotateX(Math.PI / 2),
+  controller: controllerShell(),
+  touchpad: slab(0.53, 0.27, 0.06, 0.035, 0.012),
+  shoulder: new RoundedBoxGeometry(0.38, 0.12, 0.24, 3, 0.04),
+  dpadVertical: new RoundedBoxGeometry(0.095, 0.32, 0.065, 2, 0.015),
+  dpadHorizontal: new RoundedBoxGeometry(0.32, 0.095, 0.065, 2, 0.015),
+  button: new THREE.CylinderGeometry(0.065, 0.065, 0.055, 24).rotateX(Math.PI / 2),
+  stickBase: new THREE.CylinderGeometry(0.145, 0.145, 0.055, 32).rotateX(Math.PI / 2),
+  stick: new THREE.CylinderGeometry(0.105, 0.12, 0.085, 32).rotateX(Math.PI / 2),
+  lightBar: new RoundedBoxGeometry(0.4, 0.025, 0.025, 2, 0.01),
   body: new RoundedBoxGeometry(1.42, 0.9, 0.48, 5, 0.1),
   grip: new RoundedBoxGeometry(0.36, 0.84, 0.3, 5, 0.12),
   viewfinder: faceted(
@@ -315,95 +339,92 @@ function Piece({
   );
 }
 
-// The phone shows the real project list; a tap spins it and swaps the screen mid-turn.
-export function Phone({ projectIndex, ...props }: ObjectProps & { projectIndex: number }) {
-  const spin = useRef<THREE.Group>(null!);
-  const turn = useRef({ angle: 0, target: 0, shown: projectIndex });
-  const invalidate = useThree((state) => state.invalidate);
-  const screens = useMemo(
-    () =>
-      projects.map(() => {
-        const canvas = document.createElement('canvas');
-        canvas.width = SCREEN_WIDTH;
-        canvas.height = SCREEN_HEIGHT;
-        blankScreen(canvas);
-        const texture = new THREE.CanvasTexture(canvas);
-        texture.colorSpace = THREE.SRGBColorSpace;
-        texture.anisotropy = 4;
-        return { canvas, texture };
-      }),
-    [],
-  );
-  const screen = useMemo(
-    () =>
-      new THREE.MeshBasicMaterial({ map: screens[turn.current.shown].texture, transparent: true }),
-    [screens],
-  );
-
-  useEffect(() => {
-    let live = true;
-    projects.forEach((project, index) => {
-      drawScreen(screens[index].canvas, project)
-        .then(() => {
-          if (!live) return;
-          screens[index].texture.needsUpdate = true;
-          invalidate();
-        })
-        .catch(() => {});
-    });
-    return () => {
-      live = false;
-    };
-  }, [screens, invalidate]);
-
-  useEffect(() => {
-    const current = turn.current;
-    if (current.shown === projectIndex) return;
-    if (props.reduced) {
-      current.shown = projectIndex;
-      screen.map = screens[projectIndex].texture;
-    } else {
-      current.target += Math.PI * 2;
-    }
-    invalidate();
-  }, [projectIndex, props.reduced, screen, screens, invalidate]);
+// A tap presses the face buttons and gives the controller a short rumble.
+export function Controller(props: ObjectProps) {
+  const body = useRef<THREE.Group>(null!);
+  const buttons = useRef<THREE.Group>(null!);
+  const rumble = useRef({ strength: 0, elapsed: 0 });
 
   useFrame((state, delta) => {
-    const current = turn.current;
-    current.angle = THREE.MathUtils.damp(current.angle, current.target, 4, delta);
-    // Swap the screen while it faces away from the viewer.
-    if (current.shown !== projectIndex && current.target - current.angle < Math.PI) {
-      current.shown = projectIndex;
-      screen.map = screens[projectIndex].texture;
-    }
-    spin.current.rotation.y = current.angle;
-    if (current.target - current.angle > 0.001) state.invalidate();
+    const current = rumble.current;
+    current.elapsed += delta;
+    current.strength = THREE.MathUtils.damp(current.strength, 0, 7, delta);
+    body.current.rotation.z = Math.sin(current.elapsed * 50) * current.strength * 0.055;
+    body.current.rotation.x = Math.sin(current.elapsed * 35) * current.strength * 0.035;
+    buttons.current.position.z = -current.strength * 0.035;
+    if (current.strength > 0.001) state.invalidate();
   });
 
   return (
-    <Piece name="phone" phase={0} shadow={[0.62, 0.24]} {...props}>
-      <group ref={spin}>
-        <Part geometry={shapes.phone} color={palette.cobalt} />
-        <mesh geometry={shapes.screen} material={screen} position={[0, 0, 0.0605]} />
+    <Piece
+      name="controller"
+      phase={0}
+      shadow={[0.9, 0.3]}
+      onPress={() => {
+        if (!props.reduced) rumble.current = { strength: 1, elapsed: 0 };
+      }}
+      {...props}
+    >
+      <group ref={body}>
+        <Part geometry={shapes.shoulder} color={palette.charcoal} position={[-0.53, 0.42, -0.04]} />
+        <Part geometry={shapes.shoulder} color={palette.charcoal} position={[0.53, 0.42, -0.04]} />
+        <Part geometry={shapes.controller} color={palette.paper} />
+        <Part geometry={shapes.touchpad} color={palette.charcoal} position={[0, 0.18, 0.19]} />
         <Part
-          geometry={shapes.phoneButton}
-          color={palette.ink}
-          position={[0.475, 0.42, 0]}
+          geometry={shapes.lightBar}
+          color={palette.cobalt}
+          position={[0, 0.35, 0.2]}
           outline={false}
         />
-        <Part geometry={shapes.phoneBump} color={palette.cobalt} position={[-0.2, 0.62, -0.085]} />
         <Part
-          geometry={shapes.phoneLens}
+          geometry={shapes.dpadVertical}
           color={palette.ink}
-          position={[-0.27, 0.69, -0.112]}
+          position={[-0.56, 0.12, 0.21]}
           outline={false}
         />
         <Part
-          geometry={shapes.phoneLens}
+          geometry={shapes.dpadHorizontal}
           color={palette.ink}
-          position={[-0.13, 0.55, -0.112]}
+          position={[-0.56, 0.12, 0.215]}
           outline={false}
         />
+        {[-0.25, 0.25].map((x) => (
+          <group key={x} position={[x, -0.16, 0.2]}>
+            <Part geometry={shapes.stickBase} color={palette.charcoal} outline={false} />
+            <Part
+              geometry={shapes.stick}
+              color={palette.ink}
+              position={[0, 0, 0.065]}
+              outline={false}
+            />
+          </group>
+        ))}
+        <group ref={buttons}>
+          <Part
+            geometry={shapes.button}
+            color={palette.lime}
+            position={[0.56, 0.25, 0.22]}
+            outline={false}
+          />
+          <Part
+            geometry={shapes.button}
+            color={palette.coral}
+            position={[0.69, 0.12, 0.22]}
+            outline={false}
+          />
+          <Part
+            geometry={shapes.button}
+            color={palette.cobalt}
+            position={[0.56, -0.01, 0.22]}
+            outline={false}
+          />
+          <Part
+            geometry={shapes.button}
+            color={palette.glass}
+            position={[0.43, 0.12, 0.22]}
+            outline={false}
+          />
+        </group>
       </group>
     </Piece>
   );

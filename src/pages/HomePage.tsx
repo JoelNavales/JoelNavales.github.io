@@ -5,7 +5,7 @@ import type { Variants } from 'motion/react';
 import { projects, toolkit } from '../data';
 import type { Project } from '../data';
 import { Arrow } from '../components/Icons';
-import HeroStage from '../components/hero/HeroStage';
+import HomePortrait from '../components/HomePortrait';
 import LineReveal from '../components/LineReveal';
 import Magnetic from '../components/Magnetic';
 import Marquee from '../components/Marquee';
@@ -113,7 +113,7 @@ export default function HomePage() {
               </Link>
             </motion.div>
           </motion.div>
-          <HeroStage />
+          <HomePortrait />
         </div>
         <motion.div
           className="hero-bottom"

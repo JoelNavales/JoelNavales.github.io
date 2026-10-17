@@ -2,19 +2,10 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { useRef } from 'react';
 import { MathUtils } from 'three';
 import type { Group } from 'three';
-import { Ball, Camera, King, Phone } from './objects';
+import { Ball, Camera, Controller, King } from './objects';
 import type { SceneProps } from './types';
 
-function Stage({
-  projectIndex,
-  hovered,
-  reduced,
-  pointer,
-  drag,
-  onHover,
-  onTap,
-  onReady,
-}: SceneProps) {
+function Stage({ hovered, reduced, pointer, drag, onHover, onTap, onReady }: SceneProps) {
   const group = useRef<Group>(null!);
   const announced = useRef(false);
   // Narrow screens get the same composition, scaled down to fit.
@@ -39,11 +30,10 @@ function Stage({
   const shared = { reduced, onHover, onTap };
   return (
     <group ref={group} scale={fit} position={[0, 0.3, 0]}>
-      <Phone
-        position={[-1.3, 0.12, 0]}
-        rotation={[0.04, 0.42, -0.08]}
-        hovered={hovered === 'phone'}
-        projectIndex={projectIndex}
+      <Controller
+        position={[-1.05, 0.22, 0]}
+        rotation={[0.12, 0.25, -0.14]}
+        hovered={hovered === 'controller'}
         {...shared}
       />
       <Camera
@@ -75,8 +65,9 @@ export default function HeroScene(props: SceneProps) {
       dpr={[1, 1.75]}
       camera={{ fov: 30, position: [0, 0.35, 6.3] }}
       frameloop={props.paused ? 'never' : props.reduced ? 'demand' : 'always'}
-      gl={{ powerPreference: 'low-power' }}
+      gl={{ powerPreference: 'low-power', alpha: true }}
       onCreated={(state) => {
+        state.gl.setClearColor(0x000000, 0);
         props.invalidate.current = state.invalidate;
       }}
     >

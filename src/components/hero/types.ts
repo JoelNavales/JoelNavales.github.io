@@ -1,9 +1,8 @@
 import type { RefObject } from 'react';
 
-export type HeroObject = 'phone' | 'camera' | 'king' | 'ball';
+export type HeroObject = 'controller' | 'camera' | 'king' | 'ball';
 
 export type SceneProps = {
-  projectIndex: number;
   hovered: HeroObject | null;
   reduced: boolean;
   paused: boolean;

@@ -1,33 +1,15 @@
 import { lazy, Suspense } from 'react';
-import { motion, useReducedMotion } from 'motion/react';
-import type { Variants } from 'motion/react';
+import { motion } from 'motion/react';
 import { socials } from '../data';
 import { Arrow, Asterisk } from '../components/Icons';
+import AboutVisual from '../components/AboutVisual';
 import LineReveal from '../components/LineReveal';
-import { easeOut, fadeUp, inView, rise, staggered } from '../lib/motion';
+import { fadeUp, inView, rise, staggered } from '../lib/motion';
 
 // The Formspree client only downloads when this page is shown, not with every page.
 const ContactForm = lazy(() => import('../components/ContactForm'));
 
-// The portrait is uncovered from the bottom up, like the headline lines beside it,
-// while the photo settles from a slight zoom.
-const uncover: Variants = {
-  hidden: { clipPath: 'inset(100% 0% 0% 0%)' },
-  show: {
-    clipPath: 'inset(0% 0% 0% 0%)',
-    transition: { duration: 1.1, ease: easeOut, delay: 0.2 },
-    transitionEnd: { clipPath: 'none' },
-  },
-};
-const settle: Variants = {
-  hidden: { scale: 1.12 },
-  show: { scale: 1, transition: { duration: 1.5, ease: easeOut, delay: 0.2 } },
-};
-
 export default function AboutPage() {
-  // Reduced motion already drops transforms globally; the clip-path wipe needs opting out here.
-  const reduced = useReducedMotion();
-
   return (
     <div className="portfolio-page page-about">
       <section id="about" className="about section-shell section-space">
@@ -62,28 +44,7 @@ export default function AboutPage() {
               </span>
             </motion.div>
           </motion.div>
-          <motion.div
-            className="about-portrait"
-            initial={reduced ? false : 'hidden'}
-            animate="show"
-            variants={uncover}
-          >
-            <picture>
-              <source
-                type="image/webp"
-                srcSet="/assets/pfp-480.webp 480w, /assets/pfp-800.webp 800w, /assets/pfp-1200.webp 1200w"
-                sizes="(max-width: 760px) 88vw, 36vw"
-              />
-              <motion.img
-                src="/assets/pfp-800.jpg"
-                alt="Joel Navales in a black suit and white shirt, smiling"
-                width="800"
-                height="1200"
-                fetchPriority="high"
-                variants={settle}
-              />
-            </picture>
-          </motion.div>
+          <AboutVisual />
           <motion.div
             className="about-copy"
             initial="hidden"

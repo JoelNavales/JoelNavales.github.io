@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { projects, skills, socials } from '../data';
+import { projects, skills } from '../data';
 import type { Project } from '../data';
-import { Arrow } from '../components/Icons';
 import LineReveal from '../components/LineReveal';
 import ProjectCover from '../components/ProjectCover';
 import ProjectDialog from '../components/ProjectDialog';
@@ -70,18 +69,6 @@ export default function WorkPage() {
             </motion.article>
           ))}
         </div>
-        <motion.div
-          className="work-footer"
-          initial="hidden"
-          whileInView="show"
-          viewport={inView}
-          variants={fadeUp}
-        >
-          <span>Good things take a few commits.</span>
-          <a className="text-link" href={socials[0].url} target="_blank" rel="noreferrer">
-            Find me on GitHub <Arrow diagonal />
-          </a>
-        </motion.div>
       </section>
 
       <section id="skills" className="skills section-shell section-space">
@@ -94,7 +81,7 @@ export default function WorkPage() {
         >
           <div>
             <motion.span className="eyebrow" variants={fadeUp}>
-              THE TOOLBOX / ALWAYS LEARNING
+             ALWAYS LEARNING
             </motion.span>
             <h2>
               <LineReveal

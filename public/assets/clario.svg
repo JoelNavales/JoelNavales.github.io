@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="650" viewBox="0 0 900 650" fill="none">
+  <title>Clario project — conceptual cover artwork</title>
+  <desc>An original life-dashboard window with mood faces, a habit streak and a prioritized task list over a lime circle, with a floating mood bubble and a light and dark theme toggle, on warm grid paper. This is illustrative artwork, not a product screenshot.</desc>
+  <defs>
+    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse">
+      <path d="M36 0H0V36" stroke="#D7D1C5" stroke-width="1"/>
+    </pattern>
+    <pattern id="dots" width="14" height="14" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.6" fill="#C7C0B2"/>
+    </pattern>
+  </defs>
+  <path fill="#E9E4D8" d="M0 0h900v650H0z"/>
+  <path fill="url(#grid)" d="M0 0h900v650H0z" opacity=".6"/>
+  <path fill="url(#dots)" d="M724 70h126v120H724zM52 430h112v126H52z"/>
+  <circle cx="566" cy="292" r="226" fill="#DBEC81"/>
+
+  <!-- floor -->
+  <ellipse cx="460" cy="548" rx="290" ry="17" fill="#25251F" opacity=".1"/>
+
+  <!-- dashboard window -->
+  <rect x="226" y="146" width="480" height="372" rx="14" fill="#25251F"/>
+  <rect x="212" y="132" width="480" height="372" rx="14" fill="#F6F1E6" stroke="#25251F" stroke-width="4"/>
+  <path d="M212 146a14 14 0 0 1 14-14h452a14 14 0 0 1 14 14v26H212v-26Z" fill="#25251F"/>
+  <circle cx="236" cy="152" r="6" fill="#F08B75"/>
+  <circle cx="256" cy="152" r="6" fill="#DBEC81"/>
+  <circle cx="276" cy="152" r="6" fill="#F6F1E6"/>
+  <path d="M520 152h150" stroke="#6F6F64" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- sidebar -->
+  <path d="M276 172v332" stroke="#25251F" stroke-width="3"/>
+  <rect x="230" y="192" width="28" height="28" rx="8" fill="#3859D8" stroke="#25251F" stroke-width="3"/>
+  <path d="M234 252h20M234 280h20M234 308h20M234 336h20" stroke="#25251F" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- mood row -->
+  <path d="M300 200h104" stroke="#25251F" stroke-width="6" stroke-linecap="round"/>
+  <g stroke="#25251F" stroke-width="3">
+    <rect x="300" y="218" width="112" height="86" rx="10" fill="#F08B75"/>
+    <rect x="428" y="218" width="112" height="86" rx="10" fill="#F6F1E6"/>
+    <rect x="556" y="218" width="112" height="86" rx="10" fill="#F6F1E6"/>
+    <circle cx="356" cy="261" r="25" fill="#F6F1E6"/>
+    <circle cx="484" cy="261" r="25" fill="#EAE5D9"/>
+    <circle cx="612" cy="261" r="25" fill="#EAE5D9"/>
+  </g>
+  <g fill="#25251F">
+    <circle cx="347" cy="255" r="3.5"/><circle cx="365" cy="255" r="3.5"/>
+    <circle cx="475" cy="255" r="3.5"/><circle cx="493" cy="255" r="3.5"/>
+    <circle cx="603" cy="256" r="3.5"/><circle cx="621" cy="256" r="3.5"/>
+  </g>
+  <path d="M344 266c7 9 17 9 24 0M474 270h20M601 274c7-7 15-7 22 0M598 248l9 3m19-3-9 3" stroke="#25251F" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- habit streak -->
+  <path d="M300 336h84" stroke="#25251F" stroke-width="6" stroke-linecap="round"/>
+  <g stroke="#25251F" stroke-width="3">
+    <rect x="300" y="352" width="34" height="34" rx="7" fill="#3859D8"/>
+    <rect x="344" y="352" width="34" height="34" rx="7" fill="#3859D8"/>
+    <rect x="388" y="352" width="34" height="34" rx="7" fill="#3859D8"/>
+    <rect x="432" y="352" width="34" height="34" rx="7" fill="#3859D8"/>
+    <rect x="476" y="352" width="34" height="34" rx="7"/>
+    <rect x="520" y="352" width="34" height="34" rx="7" fill="#3859D8"/>
+    <rect x="564" y="352" width="34" height="34" rx="7"/>
+  </g>
+  <path d="M308 369l7 7 12-14M352 369l7 7 12-14M396 369l7 7 12-14M440 369l7 7 12-14M528 369l7 7 12-14" stroke="#F6F1E6" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M624 356c10 8 14 17 8 26-4 6-14 7-19 1-5-7 0-12 3-17 2 5 5 6 7 4 2-4 0-9 1-14Z" fill="#F08B75" stroke="#25251F" stroke-width="3" stroke-linejoin="round"/>
+
+  <!-- tasks -->
+  <g stroke="#25251F" stroke-width="3">
+    <rect x="300" y="414" width="22" height="22" rx="5" fill="#25251F"/>
+    <rect x="300" y="452" width="22" height="22" rx="5"/>
+  </g>
+  <path d="m305 425 4 4 8-9" stroke="#F6F1E6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M338 425h150" stroke="#B9B5A9" stroke-width="6" stroke-linecap="round"/>
+  <path d="M338 463h196" stroke="#25251F" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="512" cy="425" r="8" fill="#DBEC81" stroke="#25251F" stroke-width="3"/>
+  <circle cx="556" cy="463" r="8" fill="#F08B75" stroke="#25251F" stroke-width="3"/>
+
+  <!-- floating mood bubble -->
+  <g transform="translate(14 196) rotate(-9 168 222)">
+    <path d="M118 176h108a14 14 0 0 1 14 14v58a14 14 0 0 1-14 14h-58l-26 22v-22h-24a14 14 0 0 1-14-14v-58a14 14 0 0 1 14-14Z" fill="#25251F" transform="translate(8 8)"/>
+    <path d="M118 176h108a14 14 0 0 1 14 14v58a14 14 0 0 1-14 14h-58l-26 22v-22h-24a14 14 0 0 1-14-14v-58a14 14 0 0 1 14-14Z" fill="#3859D8" stroke="#25251F" stroke-width="4" stroke-linejoin="round"/>
+    <circle cx="146" cy="211" r="5" fill="#F6F1E6"/>
+    <circle cx="198" cy="211" r="5" fill="#F6F1E6"/>
+    <path d="M150 228c12 13 32 13 44 0" stroke="#F6F1E6" stroke-width="4" stroke-linecap="round"/>
+  </g>
+
+  <!-- theme toggle -->
+  <g transform="rotate(6 712 470)">
+    <rect x="636" y="436" width="160" height="72" rx="36" fill="#25251F" transform="translate(8 8)"/>
+    <rect x="636" y="436" width="160" height="72" rx="36" fill="#25251F" stroke="#25251F" stroke-width="4"/>
+    <path d="M688 460a14 14 0 1 0 14 22 18 18 0 0 1-14-22Z" fill="#F6F1E6"/>
+    <circle cx="760" cy="472" r="27" fill="#F08B75" stroke="#F6F1E6" stroke-width="3"/>
+    <circle cx="760" cy="472" r="10" fill="#F6F1E6"/>
+    <path d="M760 452v-4m0 48v-4m-20-20h-4m48 0h-4" stroke="#F6F1E6" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <!-- accents -->
+  <path d="m760 236 8 20 21 2-16 13 5 21-18-11-18 11 5-21-16-13 21-2 8-20Z" fill="#F08B75" stroke="#25251F" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M138 262h26m-13-13v26M612 90h24m-12-12v24" stroke="#25251F" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="178" cy="330" r="8" fill="#DBEC81" stroke="#25251F" stroke-width="3"/>
+  <path d="M116 566h110m30 0h40m332 0h84" stroke="#25251F" stroke-width="2"/>
+</svg>

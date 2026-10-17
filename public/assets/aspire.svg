@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="650" viewBox="0 0 900 650" fill="none">
+  <title>Aspire — career guidance concept artwork</title>
+  <desc>An illustrated mobile app, assessment card, and branching career path with a compass. Inspired by Aspire's student assessments and career recommendations. Concept artwork, not an application screenshot.</desc>
+  <defs>
+    <pattern id="aspire-grid" width="38" height="38" patternUnits="userSpaceOnUse">
+      <path d="M38 0H0V38" stroke="#CFC8DE" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <path fill="#E7E2EE" d="M0 0h900v650H0z"/>
+  <path fill="url(#aspire-grid)" d="M0 0h900v650H0z" opacity=".5"/>
+  <circle cx="445" cy="320" r="222" fill="#3859D8"/>
+  <ellipse cx="459" cy="556" rx="295" ry="17" fill="#25251F" opacity=".1"/>
+  <path d="M110 565h690m-650 19h94m397 0h107" stroke="#25251F" stroke-width="2"/>
+
+  <!-- A branching route represents exploring several possible career paths. -->
+  <path d="M508 402h82a30 30 0 0 0 30-30V206a30 30 0 0 1 30-30h65M620 317h100M620 399h92" stroke="#25251F" stroke-width="4" stroke-linecap="round"/>
+  <path d="m698 163 16 13-16 13m5 115 16 13-16 13m-25 56 16 13-16 13" stroke="#25251F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="620" cy="317" r="8" fill="#F08B75" stroke="#25251F" stroke-width="3"/>
+
+  <!-- Mobile app concept, kept in the same illustrated style as the other covers. -->
+  <g transform="rotate(-7 405 320)">
+    <rect x="287" y="91" width="250" height="459" rx="35" fill="#25251F"/>
+    <rect x="276" y="80" width="250" height="459" rx="35" fill="#F6F1E6" stroke="#25251F" stroke-width="4"/>
+    <rect x="289" y="94" width="224" height="430" rx="25" fill="#F6F1E6" stroke="#25251F" stroke-width="2"/>
+    <rect x="360" y="103" width="82" height="14" rx="7" fill="#25251F"/>
+    <text x="311" y="151" font-family="Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="3" fill="#3859D8">ASPIRE</text>
+    <text x="310" y="190" font-family="Arial, sans-serif" font-size="28" font-weight="700" letter-spacing="-1" fill="#25251F">Find your</text>
+    <text x="310" y="222" font-family="Arial, sans-serif" font-size="28" font-weight="700" letter-spacing="-1" fill="#25251F">next step.</text>
+
+    <rect x="310" y="247" width="181" height="93" rx="12" fill="#3859D8" stroke="#25251F" stroke-width="2.5"/>
+    <circle cx="352" cy="293" r="27" fill="#F6F1E6" stroke="#25251F" stroke-width="2.5"/>
+    <path d="m364 279-6 20-19 9 7-20 18-9Z" fill="#F08B75" stroke="#25251F" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M351 267v6m0 40v6m-25-26h6m40 0h6" stroke="#25251F" stroke-width="2"/>
+    <path d="M395 279h74m-74 13h56m-56 13h67" stroke="#F6F1E6" stroke-width="5" stroke-linecap="round"/>
+    <text x="311" y="368" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#25251F">Explore your strengths</text>
+    <rect x="310" y="384" width="181" height="49" rx="9" fill="#E7E2EE" stroke="#25251F" stroke-width="2"/>
+    <path d="m325 409 6 6 12-15" stroke="#3859D8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M357 402h109m-109 13h75" stroke="#848292" stroke-width="4" stroke-linecap="round"/>
+    <rect x="310" y="448" width="181" height="39" rx="9" fill="#DBEC81" stroke="#25251F" stroke-width="2.5"/>
+    <text x="330" y="473" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#25251F">Discover possibilities</text>
+    <path d="M376 510h49" stroke="#25251F" stroke-width="4" stroke-linecap="round"/>
+  </g>
+
+  <!-- Four assessment areas reflected in the source app. -->
+  <g transform="rotate(8 182 353)">
+    <rect x="100" y="271" width="168" height="181" rx="12" fill="#25251F"/>
+    <rect x="92" y="263" width="168" height="181" rx="12" fill="#F6F1E6" stroke="#25251F" stroke-width="3"/>
+    <path d="M93 275a11 11 0 0 1 11-11h144a11 11 0 0 1 11 11v28H93v-28Z" fill="#F08B75"/>
+    <path d="M93 303h166" stroke="#25251F" stroke-width="3"/>
+    <text x="111" y="289" font-family="Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1" fill="#25251F">GET TO KNOW YOU</text>
+    <g fill="#DBEC81" stroke="#25251F" stroke-width="2">
+      <rect x="111" y="319" width="17" height="17" rx="4"/>
+      <rect x="111" y="348" width="17" height="17" rx="4"/>
+      <rect x="111" y="377" width="17" height="17" rx="4"/>
+      <rect x="111" y="406" width="17" height="17" rx="4"/>
+    </g>
+    <g font-family="Arial, sans-serif" font-size="13" fill="#25251F">
+      <text x="140" y="332">Interests</text>
+      <text x="140" y="361">Skills</text>
+      <text x="140" y="390">Personality</text>
+      <text x="140" y="419">Work values</text>
+    </g>
+  </g>
+
+  <!-- Career possibilities: design, technology, and learning. -->
+  <g transform="rotate(9 744 171)">
+    <rect x="705" y="132" width="86" height="86" rx="15" fill="#25251F"/>
+    <rect x="698" y="125" width="86" height="86" rx="15" fill="#DBEC81" stroke="#25251F" stroke-width="3"/>
+    <path d="m719 185 6-22 25-25 16 16-25 25-22 6Zm6-22 16 16m-8-24 16 16" stroke="#25251F" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+  <g transform="rotate(-5 756 318)">
+    <rect x="718" y="279" width="86" height="86" rx="15" fill="#25251F"/>
+    <rect x="711" y="272" width="86" height="86" rx="15" fill="#F6F1E6" stroke="#25251F" stroke-width="3"/>
+    <path d="m739 301-13 13 13 13m30-26 13 13-13 13m-9-32-10 38" stroke="#3859D8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g transform="rotate(7 739 415)">
+    <rect x="700" y="377" width="86" height="86" rx="15" fill="#25251F"/>
+    <rect x="693" y="370" width="86" height="86" rx="15" fill="#F08B75" stroke="#25251F" stroke-width="3"/>
+    <path d="m705 407 31-15 31 15-31 15-31-15Z" fill="#F6F1E6" stroke="#25251F" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M717 414v15q19 13 38 0v-15m12-7v24" stroke="#25251F" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <!-- Small navigation-inspired accents. -->
+  <path d="M164 153h32m-16-16v32M580 107h24m-12-12v24" stroke="#25251F" stroke-width="3" stroke-linecap="round"/>
+  <path d="m618 472 8 23 23 8-23 8-8 23-8-23-23-8 23-8 8-23Z" fill="#DBEC81" stroke="#25251F" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="208" cy="503" r="8" fill="#F08B75" stroke="#25251F" stroke-width="3"/>
+  <path d="M593 555h103" stroke="#25251F" stroke-width="2" stroke-dasharray="6 5"/>
+</svg>

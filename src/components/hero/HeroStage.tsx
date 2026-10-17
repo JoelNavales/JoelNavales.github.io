@@ -1,15 +1,15 @@
 import { Component, lazy, Suspense, useEffect, useRef, useState } from 'react';
 import type { PointerEvent as ReactPointerEvent, ReactNode } from 'react';
 import { AnimatePresence, motion, useAnimate, useInView, useReducedMotion } from 'motion/react';
-import { projects } from '../../data';
 import { easeOut } from '../../lib/motion';
 import HeroArtwork from '../HeroArtwork';
 import type { HeroObject } from './types';
 
-// three.js only downloads when the home page asks for it.
+// three.js only downloads when the About page asks for it.
 const HeroScene = lazy(() => import('./HeroScene'));
 
-const captions: Record<Exclude<HeroObject, 'phone'>, [string, string]> = {
+const captions: Record<HeroObject, [string, string]> = {
+  controller: ['GAMING', 'COD & Tekken. Tap for a little rumble.'],
   camera: ['PHOTOGRAPHY', 'A Nikon Z50. Tap to take a shot.'],
   king: ['CHESS', 'Tap to tip the king over.'],
   ball: ['FOOTBALL', 'Tap to kick it.'],
@@ -58,7 +58,6 @@ function InteractiveStage() {
   const [dragging, setDragging] = useState(false);
   const [hovered, setHovered] = useState<HeroObject | null>(null);
   const [pinned, setPinned] = useState<HeroObject | null>(null);
-  const [projectIndex, setProjectIndex] = useState(0);
   const pointer = useRef({ x: 0, y: 0 });
   const drag = useRef({ offset: 0, active: false });
   const invalidate = useRef<() => void>(() => {});
@@ -97,7 +96,6 @@ function InteractiveStage() {
     window.clearTimeout(pinTimer.current);
     setPinned(object);
     pinTimer.current = window.setTimeout(() => setPinned(null), 2800);
-    if (object === 'phone') setProjectIndex((index) => (index + 1) % projects.length);
     if (object === 'camera') shoot();
   }
 
@@ -138,23 +136,16 @@ function InteractiveStage() {
   }
 
   const active = hovered ?? pinned;
-  const project = projects[projectIndex];
-  const [label, text] =
-    active === 'phone'
-      ? [
-          project.category,
-          `${project.title}, ${project.status.toLowerCase()}. Tap for the next one.`,
-        ]
-      : active
-        ? captions[active]
-        : ['WORKBENCH', 'Drag to turn it. Tap anything.'];
+  const [label, text] = active
+    ? captions[active]
+    : ['LIFE & CURIOSITY', 'Drag to turn. Tap to explore my interests.'];
 
   return (
     <motion.div
       ref={stage}
       className="hero-art hero-stage"
       role="img"
-      aria-label="Interactive 3D illustration: a phone showing my projects, a camera, a chess king and a football."
+      aria-label="Interactive 3D illustration of my interests: a gaming controller, a camera, a chess king and a football."
       style={{ cursor: hovered ? 'pointer' : dragging ? 'grabbing' : 'grab' }}
       initial={{ opacity: 0, scale: 0.96 }}
       animate={ready ? { opacity: 1, scale: 1 } : undefined}
@@ -163,7 +154,6 @@ function InteractiveStage() {
     >
       <Suspense fallback={null}>
         <HeroScene
-          projectIndex={projectIndex}
           hovered={hovered}
           reduced={reduced}
           paused={!visible}

@@ -1,3 +1,5 @@
+import { assetUrl } from './lib/assets';
+
 export type Project = {
   id: string;
   number: string;
@@ -9,48 +11,53 @@ export type Project = {
   stack: string[];
   image: string;
   color: string;
+  repo?: string;
+  demo?: string;
 };
 
 export const projects: Project[] = [
   {
-    id: 'car-rental',
+    id: 'locker',
     number: '01',
-    title: 'Car rental app',
+    title: 'Locker',
     category: 'Mobile development',
-    status: 'In progress',
-    description:
-      'Putting my mobile development skills into practice with a real-world car rental application.',
+    status: 'In development',
+    description: 'A study app where every subject is a locker you open, not a boring folder.',
     detail:
-      'A car rental application I’m currently building with Flutter, Firebase, and a PHP backend. This is ongoing work as I explore how mobile interfaces and backend services come together.',
-    stack: ['Flutter', 'Firebase', 'PHP'],
-    image: '/assets/car-rental.svg',
+      'Locker is my capstone project: a mobile study app built with Flutter and Firebase, where each subject becomes a locker you unlock. It’s being designed around priority colors that flag what’s urgent across lockers, the calendar, and tasks, a focus timer with an ambient sound mixer, and a study crew that keeps you accountable. It’s still in development.',
+    stack: ['Flutter', 'Dart', 'Firebase'],
+    image: assetUrl('assets/locker.svg'),
     color: 'coral',
+    repo: 'https://github.com/JoelNavales/locker',
   },
   {
-    id: 'e-shop',
+    id: 'clario',
     number: '02',
-    title: 'e-shop',
+    title: 'Clario',
     category: 'Web development',
-    status: 'Private repository',
-    description: 'A PHP project in my current development workspace.',
+    status: 'Live demo',
+    description: 'A fast, offline-ready life dashboard for tracking mood, habits, and tasks.',
     detail:
-      'e-shop is a private PHP project I’m currently working on. The source code is not publicly available. Get in touch if you’d like to talk about my work and what I’m learning.',
-    stack: ['PHP'],
-    image: '/assets/e-shop.svg',
+      'Clario v1 is a life dashboard built with React, TypeScript, and Tailwind CSS. You log one mood a day with an optional journal note, check off habits to build streaks, and manage tasks by priority, with light, dark, and custom themes. It has no backend or accounts: everything runs in the browser and is saved to local storage, a deliberately simple first version to test the core experience before adding cloud sync.',
+    stack: ['React', 'TypeScript', 'Tailwind CSS'],
+    image: assetUrl('assets/clario.svg'),
     color: 'green',
+    repo: 'https://github.com/JoelNavales/clario-v1',
+    demo: 'https://joelnavales.github.io/clario-v1/',
   },
   {
-    id: 'traits',
+    id: 'aspire',
     number: '03',
-    title: 'Traits',
-    category: 'PHP development',
-    status: 'Private repository',
-    description: 'More hands-on development and exploration with PHP.',
+    title: 'Aspire',
+    category: 'Mobile app & UI/UX',
+    status: 'Public repository',
+    description: 'Helping students connect their interests and strengths to future career paths.',
     detail:
-      'Traits is another private PHP repository in my current work. It’s part of my ongoing exploration of backend development. The source code is not publicly available.',
-    stack: ['PHP'],
-    image: '/assets/traits.svg',
+      'Aspire is a team-built career guidance app for students. My contribution focused on interface design and Flutter UI/UX: making assessments and career exploration approachable. The app brings together quizzes about interests, skills, personality, and work values, then uses Google Gemini to suggest career paths with explanations and required skills. Built with Flutter and Dart, it uses Firebase Authentication and Cloud Firestore for accounts and saved progress. The public repository includes the app source and project documentation.',
+    stack: ['Flutter', 'Dart', 'Firebase', 'Gemini AI'],
+    image: assetUrl('assets/aspire.svg'),
     color: 'lavender',
+    repo: 'https://github.com/senRyuu286/SE-Aspire',
   },
 ];
 

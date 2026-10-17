@@ -1,13 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Link, NavLink, Outlet, ScrollRestoration, useLocation } from 'react-router-dom';
-import {
-  motion,
-  MotionConfig,
-  useMotionValueEvent,
-  useReducedMotion,
-  useScroll,
-  useSpring,
-} from 'motion/react';
+import { motion, MotionConfig, useMotionValueEvent, useScroll, useSpring } from 'motion/react';
 import { Arrow } from './components/Icons';
 import QuickContact, { preloadContactForm } from './components/QuickContact';
 import Toast from './components/Toast';
@@ -23,27 +16,11 @@ export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
   const previousLocation = useRef(location);
-  const reduced = useReducedMotion();
   const { scrollY, scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 200, damping: 40, restDelta: 0.001 });
   const [scrolled, setScrolled] = useState(false);
-  const [tucked, setTucked] = useState(false);
-  const [navFocused, setNavFocused] = useState(false);
-  const travel = useRef(0);
 
-  useMotionValueEvent(scrollY, 'change', (latest) => {
-    const delta = latest - (scrollY.getPrevious() ?? latest);
-    // Distance travelled in the current direction, so small jitters don't toggle the bar.
-    travel.current =
-      Math.sign(delta) === Math.sign(travel.current) ? travel.current + delta : delta;
-    setScrolled(latest > 24);
-    if (latest < 320 || travel.current < -32) setTucked(false);
-    else if (travel.current > 48) setTucked(true);
-  });
-
-  // Tucked away while reading down the page, but never with the menu open, while the nav has
-  // keyboard focus, or for people who prefer reduced motion.
-  const hidden = tucked && !menuOpen && !navFocused && !reduced;
+  useMotionValueEvent(scrollY, 'change', (latest) => setScrolled(latest > 24));
 
   const [quickOpen, setQuickOpen] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
@@ -98,16 +75,7 @@ export default function App() {
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <motion.div
-        className={scrolled ? 'site-bar is-scrolled' : 'site-bar'}
-        animate={{ y: hidden ? '-100%' : '0%' }}
-        transition={{ duration: 0.35, ease: easeOut }}
-        onFocus={() => setNavFocused(true)}
-        onBlur={(event) => {
-          if (!event.currentTarget.contains(event.relatedTarget as Node | null))
-            setNavFocused(false);
-        }}
-      >
+      <div className={scrolled ? 'site-bar is-scrolled' : 'site-bar'}>
         <header className="site-header">
           <Link
             className="brand"
@@ -193,15 +161,15 @@ export default function App() {
           </nav>
         </header>
         <motion.div className="scroll-progress" style={{ scaleX: progress }} aria-hidden="true" />
-      </motion.div>
+      </div>
       <main id="main" className="site-main" tabIndex={-1}>
         <Outlet />
       </main>
       <footer className="site-footer section-shell">
-        <span>© {new Date().getFullYear()} Joel Navales</span>
-        <span className="footer-note">
-          Made with curiosity, in Cebu. <span className="coral-text">✳</span>
-        </span>
+        <small>© {new Date().getFullYear()} Joel Franco V. Navales. All rights reserved.</small>
+        <small className="footer-note">
+          All other trademarks and typefaces are the property of their respective owners.
+        </small>
       </footer>
       <QuickContact open={quickOpen} onClose={() => setQuickOpen(false)} onSent={messageSent} />
       <Toast message={toast} />

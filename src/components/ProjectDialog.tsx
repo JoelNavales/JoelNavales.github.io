@@ -109,13 +109,23 @@ export default function ProjectDialog({
             <motion.p className="art-disclosure" variants={fadeUp}>
               Cover artwork is a concept illustration, not an application screenshot.
             </motion.p>
-            <motion.div variants={fadeUp}>
+            <motion.div className="dialog-actions" variants={fadeUp}>
               <a
                 className="button button-dark"
                 href={`mailto:navales546@gmail.com?subject=${encodeURIComponent(`Let’s talk about ${project.title}`)}`}
               >
                 Let’s talk about this <Arrow diagonal />
               </a>
+              {project.demo && (
+                <a className="text-link" href={project.demo} target="_blank" rel="noreferrer">
+                  Live demo <Arrow diagonal />
+                </a>
+              )}
+              {project.repo && (
+                <a className="text-link" href={project.repo} target="_blank" rel="noreferrer">
+                  View on GitHub <Arrow diagonal />
+                </a>
+              )}
             </motion.div>
           </motion.div>
         </>

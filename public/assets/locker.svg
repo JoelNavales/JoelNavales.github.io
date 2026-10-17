@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="650" viewBox="0 0 900 650" fill="none">
+  <title>Locker project — conceptual cover artwork</title>
+  <desc>An original coral school locker with a combination dial over a cobalt circle, beside a priority-colored calendar card and an ambient sound mixer, on warm grid paper. This is illustrative artwork, not a product screenshot.</desc>
+  <defs>
+    <pattern id="grid" width="38" height="38" patternUnits="userSpaceOnUse">
+      <path d="M38 0H0V38" stroke="#D7D1C5" stroke-width="1"/>
+    </pattern>
+    <pattern id="hatch" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(40)">
+      <path d="M0 0V9" stroke="#25251F" stroke-width="2"/>
+    </pattern>
+  </defs>
+  <path fill="#EAE5D9" d="M0 0h900v650H0z"/>
+  <path fill="url(#grid)" d="M0 0h900v650H0z" opacity=".6"/>
+  <circle cx="452" cy="318" r="214" fill="#3859D8"/>
+
+  <!-- route from the sound mixer to the locker -->
+  <path d="M150 300v-78a30 30 0 0 1 30-30h88a30 30 0 0 0 30-30v-54" stroke="#25251F" stroke-width="3" stroke-dasharray="9 8"/>
+  <path d="m286 118 12-14 12 14" stroke="#25251F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- floor -->
+  <ellipse cx="452" cy="548" rx="300" ry="18" fill="#25251F" opacity=".1"/>
+  <path d="M96 556h708" stroke="#25251F" stroke-width="3"/>
+  <path d="M150 578h120m30 0h44m228 0h94" stroke="#25251F" stroke-width="2"/>
+
+  <!-- locker -->
+  <path d="M352 110h212a14 14 0 0 1 14 14v418H338V124a14 14 0 0 1 14-14Z" fill="#25251F"/>
+  <path d="M338 104h212a14 14 0 0 1 14 14v418H324V118a14 14 0 0 1 14-14Z" fill="#F08B75" stroke="#25251F" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M346 126h196v388H346z" stroke="#25251F" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M378 158h132M378 180h132M378 202h132" stroke="#25251F" stroke-width="8" stroke-linecap="round"/>
+  <rect x="392" y="236" width="104" height="58" rx="6" fill="#F6F1E6" stroke="#25251F" stroke-width="3"/>
+  <text x="444" y="281" font-family="'Arial Black', 'Helvetica Neue', Arial, sans-serif" font-size="44" font-weight="900" letter-spacing="-1" text-anchor="middle" fill="#25251F">07</text>
+  <circle cx="444" cy="388" r="50" fill="#F6F1E6" stroke="#25251F" stroke-width="4"/>
+  <circle cx="444" cy="388" r="34" fill="#DBEC81" stroke="#25251F" stroke-width="3"/>
+  <path d="M444 344v12m0 64v12m-44-44h12m64 0h12m-77-31 8 8m45 45 8 8m0-61-8 8m-45 45-8 8" stroke="#25251F" stroke-width="3" stroke-linecap="round"/>
+  <path d="M444 388v-26" stroke="#25251F" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="444" cy="388" r="7" fill="#25251F"/>
+  <rect x="512" y="356" width="16" height="64" rx="5" fill="#DBEC81" stroke="#25251F" stroke-width="3"/>
+  <path d="M362 478h46" stroke="url(#hatch)" stroke-width="16"/>
+
+  <!-- priority calendar -->
+  <g transform="rotate(7 700 372)">
+    <rect x="610" y="282" width="190" height="186" rx="10" fill="#25251F"/>
+    <rect x="600" y="272" width="190" height="186" rx="10" fill="#F6F1E6" stroke="#25251F" stroke-width="4"/>
+    <path d="M600 282a10 10 0 0 1 10-10h170a10 10 0 0 1 10 10v30H600v-30Z" fill="#3859D8" stroke="#25251F" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M640 260v28m110-28v28" stroke="#25251F" stroke-width="5" stroke-linecap="round"/>
+    <g stroke="#25251F" stroke-width="2.5">
+      <rect x="616" y="328" width="30" height="26" rx="4"/>
+      <rect x="656" y="328" width="30" height="26" rx="4" fill="#F08B75"/>
+      <rect x="696" y="328" width="30" height="26" rx="4"/>
+      <rect x="736" y="328" width="30" height="26" rx="4" fill="#DBEC81"/>
+      <rect x="616" y="364" width="30" height="26" rx="4" fill="#DBEC81"/>
+      <rect x="656" y="364" width="30" height="26" rx="4"/>
+      <rect x="696" y="364" width="30" height="26" rx="4" fill="#F08B75"/>
+      <rect x="736" y="364" width="30" height="26" rx="4"/>
+      <rect x="616" y="400" width="30" height="26" rx="4"/>
+      <rect x="656" y="400" width="30" height="26" rx="4" fill="#3859D8"/>
+      <rect x="696" y="400" width="30" height="26" rx="4"/>
+      <rect x="736" y="400" width="30" height="26" rx="4" fill="#F08B75"/>
+    </g>
+  </g>
+
+  <!-- ambient sound mixer -->
+  <g transform="rotate(-6 196 420)">
+    <rect x="114" y="326" width="176" height="172" rx="12" fill="#25251F"/>
+    <rect x="104" y="316" width="176" height="172" rx="12" fill="#DBEC81" stroke="#25251F" stroke-width="4"/>
+    <path d="M136 452V392m36 60V352m36 100v-74m36 74v-42" stroke="#F6F1E6" stroke-width="16" stroke-linecap="round"/>
+    <path d="M136 452V392m36 60V352m36 100v-74m36 74v-42" stroke="#25251F" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="136" cy="414" r="9" fill="#F08B75" stroke="#25251F" stroke-width="3"/>
+    <circle cx="172" cy="370" r="9" fill="#3859D8" stroke="#25251F" stroke-width="3"/>
+    <circle cx="208" cy="430" r="9" fill="#F08B75" stroke="#25251F" stroke-width="3"/>
+    <circle cx="244" cy="420" r="9" fill="#3859D8" stroke="#25251F" stroke-width="3"/>
+  </g>
+
+  <!-- accents -->
+  <path d="m668 132 9 24 25 2-19 16 6 25-21-14-21 14 6-25-19-16 25-2 9-24Z" fill="#DBEC81" stroke="#25251F" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M770 196h30m-15-15v30M86 136h24M98 124v24" stroke="#25251F" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="248" cy="242" r="9" fill="#F08B75" stroke="#25251F" stroke-width="3"/>
+  <circle cx="610" cy="520" r="6" fill="#25251F"/>
+  <path d="M724 520h44m-36 12h36" stroke="#25251F" stroke-width="2" stroke-linecap="round"/>
+</svg>

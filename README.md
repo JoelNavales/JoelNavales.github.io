@@ -2,19 +2,19 @@
 
 A responsive portfolio for Joel Franco V. Navales, a fourth-year BSIT student at the University of San Jose–Recoletos in Cebu, Philippines.
 
-Built with **React, Vite, TypeScript, React Router, and CSS**, using **pnpm**. Animation uses **Motion** (formerly Framer Motion), and the home page's 3D scene uses **three.js** through **React Three Fiber**. The visual direction takes inspiration from the playful introduction and project-led storytelling at [Brice Clain’s portfolio](https://briceclain.com/en/), with original layouts, copy, and illustrations.
+Built with **React, Vite, TypeScript, React Router, and CSS**, using **pnpm**. Animation uses **Motion** (formerly Framer Motion), and the About page's 3D scene uses **three.js** through **React Three Fiber**. The visual direction takes inspiration from the playful introduction and project-led storytelling at [Brice Clain’s portfolio](https://briceclain.com/en/), with original layouts, copy, and illustrations.
 
 ## Pages and motion
 
-- `/`: Home — introduction with a typed greeting, a sliding toolkit strip, and the project list.
+- `/`: Home — introduction with a typed greeting and portrait, a sliding toolkit strip, and the project list.
 - `/work`: Work — projects, project dialogs, and skills.
-- `/about`: About — biography, interests, and contact details. `/about#contact` links directly to contact.
+- `/about`: About — biography, interactive 3D interests, and contact details. `/about#contact` links directly to contact.
 
 The header pins to the top once you scroll: it shrinks, turns frosted, drops its tagline, and shows a coral reading-progress line. It slides away while you scroll down and comes back as soon as you scroll up, but stays put while the mobile menu is open, while the navigation has keyboard focus, or with a reduced-motion preference.
 
 Route changes use a short View Transition crossfade, and each page plays its own entrance: headlines rise line by line from behind a mask, supporting content fades up in sequence, and below-the-fold sections reveal as they scroll into view. Project covers tilt toward the mouse, the project dialog animates in and out, and the active-page dot glides between navigation links.
 
-The home page hero is an interactive 3D scene drawn in the style of the project illustrations (cel shading and ink outlines): a phone showing the real project list, a camera, a chess king, and a football. Drag to turn it; tap the phone to cycle projects, the camera for a flash, the king to tip it, and the ball to kick it. three.js loads as a separate chunk only on the home page, rendering pauses when the hero is off screen, and browsers without WebGL 2 get the original SVG illustration instead.
+The Home page pairs the introduction with Joel's portrait and a reduced-motion-aware reveal. The About page has an interactive 3D scene drawn in the style of the project illustrations (cel shading and ink outlines), floating directly over the dark page background: a gaming controller for COD and Tekken, a camera for photography, a chess king, and a football. Drag to turn it; tap the controller to rumble and press its buttons, the camera for a flash, the king to tip it, and the ball to kick it. three.js loads as a separate chunk only on the About page, rendering pauses when the scene is off screen, and browsers without WebGL 2 get the original CSS illustration instead.
 
 On the home page, the toolkit strip slides continuously, speeds up as you scroll, and reverses when you scroll back up; it pauses on hover or with its Pause button. Hovering a project in the list shows its cover beside the pointer, and clicking opens the project dialog.
 
@@ -38,7 +38,27 @@ pnpm build
 pnpm preview
 ```
 
-The build checks TypeScript and creates a static site in `dist/`. Production hosting must serve `index.html` for `/work` and `/about` so direct links and refreshes work. `public/_redirects` supplies this fallback on hosts supporting that format; configure an equivalent SPA rewrite on other hosts. Vite’s development and preview servers already handle these routes. This repository has not been deployed automatically.
+The build checks TypeScript and creates a static site in `dist/`. It also generates `work/index.html`, `about/index.html`, `404.html`, and `.nojekyll` so GitHub Pages can serve direct links and refreshes. The router normalizes trailing slashes while retaining clean URLs. `public/_redirects` remains available for hosts supporting SPA rewrites.
+
+### GitHub Pages
+
+The workflow at `.github/workflows/deploy-pages.yml` installs Node.js 24 and the pnpm version declared in `package.json`, installs the frozen lockfile, builds the site, and deploys `dist/` when you push to `main`. You can also start it manually from the Actions tab.
+
+1. Open [this repository's Pages settings](https://github.com/JoelNavales/my-portfolio/settings/pages).
+2. Under **Build and deployment → Source**, select **GitHub Actions**.
+3. Commit and push these changes to `main`, then wait for **Deploy portfolio to GitHub Pages** in the Actions tab to finish.
+4. Visit **https://joelnavales.github.io/my-portfolio/**. Work and About are available at `/my-portfolio/work` and `/my-portfolio/about`; the contact link is `/my-portfolio/about#contact`.
+
+The workflow obtains the published base path from GitHub Pages and passes it as `VITE_BASE_PATH`, so navigation, portraits, project covers, fonts, and the favicon use the correct prefix. A root site or custom domain uses `/` automatically. No personal access token or additional repository secrets are needed. See the [Vite deployment guide](https://vite.dev/guide/static-deploy.html#github-pages) and [GitHub's custom workflow documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
+
+To preview the repository path locally:
+
+```sh
+VITE_BASE_PATH=/my-portfolio/ pnpm build
+pnpm preview
+```
+
+Open `http://127.0.0.1:4173/my-portfolio/`. Local development with `pnpm dev` and builds without `VITE_BASE_PATH` use `/`.
 
 ## Editing content
 
@@ -47,12 +67,13 @@ The build checks TypeScript and creates a static site in `dist/`. Production hos
 - `src/App.tsx`: shared header, footer, navigation, page titles, and focus handling.
 - `src/pages/`: Home, Work, and About content.
 - `src/components/`: shared artwork, icons, project dialog and covers, and headline reveals.
-- `src/components/hero/`: the 3D hero. `HeroStage.tsx` handles loading, fallback, dragging, and captions; `HeroScene.tsx` sets up the scene; `objects.tsx` builds the models; `phoneScreen.ts` paints the phone screen from `src/data.ts`.
+- `src/components/HomePortrait.tsx` and `AboutVisual.tsx`: the Home portrait and About interests panel. Their visual styles live in `src/components/page-visuals.css`, separate from the shared responsive layouts.
+- `src/components/hero/`: the About page's 3D scene. `HeroStage.tsx` handles loading, fallback, dragging, and captions; `HeroScene.tsx` sets up the transparent scene; `objects.tsx` builds the controller, camera, chess king, and football.
 - `src/lib/motion.ts`: shared easing, entrance variants, and scroll-reveal settings.
 - `src/styles.css`: layout, theme, and responsive styles.
 - `src/page-transitions.css`: route transitions and their reduced-motion behavior.
 - `public/assets/`: original concept illustrations and locally hosted fonts, with font licenses.
-- `public/assets/pfp-*.webp` and `pfp-800.jpg`: the About page portrait at web sizes, made from `pfp.jpg`. To swap the photo, replace `pfp.jpg` and regenerate them:
+- `public/assets/pfp-*.webp` and `pfp-800.jpg`: the Home page portrait at web sizes, made from `pfp.jpg`. To swap the photo, replace `pfp.jpg` and regenerate them:
 
   ```sh
   cd public/assets
@@ -62,7 +83,7 @@ The build checks TypeScript and creates a static site in `dist/`. Production hos
 
 - `index.html`: page title, description, and sharing metadata.
 
-Project covers are conceptual artwork, not application screenshots. The car rental application is marked in progress; e-shop and Traits are marked as private repositories. There are no invented project metrics, testimonials, or employment details.
+Project covers are conceptual artwork, not application screenshots. Locker is marked in development and Clario links to its live demo, both with their public repositories. Aspire links to [SE-Aspire](https://github.com/senRyuu286/SE-Aspire), a team-built Flutter career guidance app using Firebase and Gemini; its description credits Joel's interface design and Flutter UI/UX contribution as documented in that repository. There are no invented project metrics, testimonials, or employment details.
 
 ## Contact form
 

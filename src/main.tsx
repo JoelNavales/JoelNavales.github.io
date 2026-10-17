@@ -16,20 +16,38 @@ const legacyRoutes: Record<string, string> = {
   '#about': '/about',
   '#contact': '/about#contact',
 };
-const legacyTarget = window.location.pathname === '/' && legacyRoutes[window.location.hash];
-if (legacyTarget) window.history.replaceState(null, '', legacyTarget);
+const base = import.meta.env.BASE_URL;
+const basePath = base.replace(/\/$/, '');
 
-const router = createBrowserRouter([
-  {
-    element: <App />,
-    children: [
-      { path: '/', element: <HomePage /> },
-      { path: '/work', element: <WorkPage /> },
-      { path: '/about', element: <AboutPage /> },
-      { path: '*', element: <Navigate to="/" replace /> },
-    ],
-  },
-]);
+// Static hosts redirect directory entries to a trailing slash. Normalize these before
+// routing so page titles, active navigation, and the existing clean links stay consistent.
+const pathname = window.location.pathname;
+if (pathname !== base && pathname.startsWith(`${basePath}/`) && pathname.endsWith('/')) {
+  window.history.replaceState(
+    null,
+    '',
+    `${pathname.replace(/\/+$/, '')}${window.location.search}${window.location.hash}`,
+  );
+}
+
+const isHome = [base, basePath].includes(window.location.pathname);
+const legacyTarget = isHome && legacyRoutes[window.location.hash];
+if (legacyTarget) window.history.replaceState(null, '', `${basePath}${legacyTarget}`);
+
+const router = createBrowserRouter(
+  [
+    {
+      element: <App />,
+      children: [
+        { path: '/', element: <HomePage /> },
+        { path: '/work', element: <WorkPage /> },
+        { path: '/about', element: <AboutPage /> },
+        { path: '*', element: <Navigate to="/" replace /> },
+      ],
+    },
+  ],
+  { basename: base },
+);
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

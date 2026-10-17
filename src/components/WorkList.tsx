@@ -1,12 +1,10 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import type { PointerEvent } from 'react';
 import { motion, useReducedMotion, useSpring, useTransform, useVelocity } from 'motion/react';
 import type { Project } from '../data';
 import { easeOut, fadeUp, inView, staggered } from '../lib/motion';
 import { Arrow } from './Icons';
 
-const PREVIEW_WIDTH = 300;
-const PREVIEW_HEIGHT = (PREVIEW_WIDTH * 650) / 900;
 // Overdamped, so the preview trails the pointer without wobbling.
 const trail = { stiffness: 300, damping: 34, mass: 0.6 };
 
@@ -21,15 +19,19 @@ export default function WorkList({
 }) {
   const reduced = useReducedMotion();
   const [active, setActive] = useState<number | null>(null);
+  const preview = useRef<HTMLDivElement>(null);
   const x = useSpring(0, trail);
   const y = useSpring(0, trail);
   const rotate = useTransform(useVelocity(x), [-1500, 1500], [-8, 8], { clamp: true });
 
   function place(event: PointerEvent, immediate = false) {
-    // Beside the pointer, flipping to its left near the edge of the screen.
-    const fitsRight = event.clientX + 32 + PREVIEW_WIDTH < window.innerWidth - 16;
-    const left = fitsRight ? event.clientX + 32 : event.clientX - 32 - PREVIEW_WIDTH;
-    const top = event.clientY - PREVIEW_HEIGHT / 2;
+    // Beside the pointer, flipping to its left near the edge of the screen. Measured, since the
+    // preview grows with the page on large screens.
+    const width = preview.current?.offsetWidth ?? 0;
+    const height = preview.current?.offsetHeight ?? 0;
+    const fitsRight = event.clientX + 32 + width < window.innerWidth - 16;
+    const left = fitsRight ? event.clientX + 32 : event.clientX - 32 - width;
+    const top = event.clientY - height / 2;
     if (immediate) {
       x.jump(left);
       y.jump(top);
@@ -76,6 +78,7 @@ export default function WorkList({
       </motion.ul>
       {!reduced && (
         <motion.div
+          ref={preview}
           className="work-preview"
           aria-hidden="true"
           style={{ x, y, rotate }}
