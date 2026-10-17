@@ -42,6 +42,11 @@ jobs:
         env:
           VITE_BASE_PATH: ${{ steps.pages.outputs.base_path }}/
 
+      # Pages has no rewrites (it ignores _redirects), so serve the app for every unknown path
+      # and let the router render /work and /about when they're opened or refreshed directly.
+      - name: Add single-page app fallback
+        run: cp dist/index.html dist/404.html
+
       - name: Upload site
         uses: actions/upload-pages-artifact@v5
         with:
