@@ -4,6 +4,7 @@ import { achievementPhotos, achievements, socials } from '../data';
 import { Arrow, Asterisk } from '../components/Icons';
 import AboutVisual from '../components/AboutVisual';
 import LineReveal from '../components/LineReveal';
+import PhotoCarousel from '../components/PhotoCarousel';
 import { fadeUp, inView, rise, staggered } from '../lib/motion';
 
 // The Formspree client only downloads when this page is shown, not with every page.
@@ -103,16 +104,7 @@ export default function AboutPage() {
             </motion.p>
           </div>
           <motion.div className="achievement-photos" variants={fadeUp}>
-            {achievementPhotos.map((photo) => (
-              <img
-                key={photo.area}
-                className={`photo-${photo.area}`}
-                src={photo.src}
-                alt={photo.alt}
-                loading="lazy"
-                decoding="async"
-              />
-            ))}
+            <PhotoCarousel photos={achievementPhotos} label="Photos from the research summit" />
           </motion.div>
           <ol className="award-list">
             {achievements.map((award, index) => (

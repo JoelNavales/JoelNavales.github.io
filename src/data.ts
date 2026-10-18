@@ -1,3 +1,4 @@
+import type { CarouselPhoto } from './components/PhotoCarousel';
 import { assetUrl } from './lib/assets';
 
 export type Project = {
@@ -113,26 +114,27 @@ export const achievements = [
   },
 ];
 
-export const achievementPhotos = [
+export const achievementPhotos: CarouselPhoto[] = [
   {
     src: assetUrl('assets/SHS-RESEARCH-web.jpg'),
     alt: 'Team Sereen at the SenSOIL research booth, beside the feasibility study poster',
-    area: 'booth',
-  },
-  {
-    src: assetUrl('assets/SHS-Awards-2-web.jpg'),
-    alt: 'The team outside the University of San Jose–Recoletos holding their certificates and medals',
-    area: 'campus',
+    caption: 'Our SenSOIL booth and research poster',
   },
   {
     src: assetUrl('assets/SHS-Award-web.jpg'),
     alt: 'The team on stage at the 5th Josenian SHS Research Summit with their awards',
-    area: 'stage',
+    caption: 'On stage after the awarding',
+  },
+  {
+    src: assetUrl('assets/SHS-Awards-2-web.jpg'),
+    alt: 'The team outside the University of San Jose–Recoletos holding their certificates and medals',
+    caption: 'Certificates and medals, outside USJ–R',
+    position: '50% 85%',
   },
   {
     src: assetUrl('assets/SenSOIL-web.jpg'),
     alt: 'The SenSOIL device modeled in Fusion 360: a control box wired to an NPK soil probe',
-    area: 'model',
+    caption: 'The SenSOIL device, modeled in Fusion 360',
   },
 ];
 

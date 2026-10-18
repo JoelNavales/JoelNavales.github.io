@@ -996,38 +996,107 @@ h1 {
 }
 .achievement-photos {
   grid-area: photos;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-areas:
-    'booth booth'
-    'campus stage'
-    'campus model';
-  gap: 0.625rem;
 }
-.achievement-photos img {
-  display: block;
-  width: 100%;
+.carousel-frame {
+  position: relative;
   aspect-ratio: 4 / 3;
-  object-fit: cover;
+  overflow: hidden;
   border: 1px solid #4b514a;
   border-radius: 0.1875rem;
   background: #0e0e0e;
 }
-.achievement-photos .photo-booth {
-  grid-area: booth;
-}
-.achievement-photos .photo-campus {
-  grid-area: campus;
+.carousel-frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
   height: 100%;
-  aspect-ratio: auto;
-  object-position: 50% 70%;
+  object-fit: cover;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
 }
-.achievement-photos .photo-stage {
-  grid-area: stage;
+.carousel-frame img:active {
+  cursor: grabbing;
 }
-.achievement-photos .photo-model {
-  grid-area: model;
-  background: #f3f3f3;
+.carousel-count {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.1875rem;
+  background: rgb(14 14 14 / 0.7);
+  color: var(--paper);
+  pointer-events: none;
+}
+.carousel-progress {
+  display: flex;
+  gap: 0.375rem;
+  margin-top: 0.875rem;
+}
+.carousel-progress button {
+  flex: 1;
+  height: 1.25rem;
+  padding: 0;
+  position: relative;
+}
+.carousel-progress button::after {
+  content: '';
+  position: absolute;
+  inset: 50% 0 auto;
+  height: 2px;
+  background: #4b514a;
+  transition: background 0.3s;
+}
+.carousel-progress button[aria-current='true']::after {
+  background: #d3df8b;
+}
+.carousel-progress button:hover::after {
+  background: #8a9384;
+}
+.carousel-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+.carousel-caption {
+  font-size: 0.8125rem;
+  color: #bdc2b6;
+}
+.carousel-controls {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+.carousel-controls button {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid #5b6258;
+  border-radius: 50%;
+  color: var(--paper);
+  transition:
+    background 0.25s,
+    color 0.25s,
+    border-color 0.25s;
+}
+.carousel-controls button:hover {
+  background: #d3df8b;
+  border-color: #d3df8b;
+  color: #272c29;
+}
+.carousel-controls svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+.arrow-back {
+  transform: rotate(180deg);
+}
+.carousel button:focus-visible {
+  outline: 2px solid #d3df8b;
+  outline-offset: 2px;
 }
 .award-list {
   grid-area: awards;
@@ -1825,9 +1894,6 @@ h1 {
   }
   .achievements-head h2 {
     font-size: 2.75rem;
-  }
-  .achievement-photos {
-    gap: 0.5rem;
   }
   .award-list h3 {
     font-size: 1.125rem;
