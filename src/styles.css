@@ -959,6 +959,111 @@ h1 {
 .about a:focus-visible {
   outline-color: #d3df8b;
 }
+/* Story and awards on the left; the photo collage sits on the right, as in .about-main. */
+.achievements {
+  margin-top: 6.25rem;
+  padding-top: 3.125rem;
+  border-top: 1px solid #4b514a;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  grid-template-areas:
+    'head photos'
+    'awards photos';
+  gap: 2.5rem 5.9375rem;
+  align-items: start;
+}
+.achievements-head {
+  grid-area: head;
+}
+.achievements-head h2 {
+  font-size: clamp(2.5rem, 4.4vw, 3.875rem);
+  letter-spacing: -0.045em;
+  line-height: 1.07;
+  margin: 1.5rem 0 1.5625rem;
+}
+.achievements-head .serif-word {
+  color: #d3df8b;
+}
+.achievements-head p {
+  max-width: 33.75rem;
+  font-size: 0.875rem;
+  line-height: 1.9;
+  color: #bdc2b6;
+}
+.achievements-head strong {
+  color: var(--paper);
+  font-weight: 400;
+}
+.achievement-photos {
+  grid-area: photos;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    'booth booth'
+    'campus stage'
+    'campus model';
+  gap: 0.625rem;
+}
+.achievement-photos img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border: 1px solid #4b514a;
+  border-radius: 0.1875rem;
+  background: #0e0e0e;
+}
+.achievement-photos .photo-booth {
+  grid-area: booth;
+}
+.achievement-photos .photo-campus {
+  grid-area: campus;
+  height: 100%;
+  aspect-ratio: auto;
+  object-position: 50% 70%;
+}
+.achievement-photos .photo-stage {
+  grid-area: stage;
+}
+.achievement-photos .photo-model {
+  grid-area: model;
+  background: #f3f3f3;
+}
+.award-list {
+  grid-area: awards;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 33.75rem;
+}
+.award-list li {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  padding: 1.375rem 0;
+  border-top: 1px solid #4b514a;
+}
+.award-number {
+  color: var(--coral);
+  padding-top: 0.25rem;
+}
+.award-list h3 {
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  margin: 0;
+}
+.award-meta {
+  display: block;
+  color: #a4ad9f;
+  margin-top: 0.25rem;
+}
+.award-list p {
+  font-size: 0.875rem;
+  line-height: 1.8;
+  color: #bdc2b6;
+  margin: 0.625rem 0 0;
+}
+
 .beyond {
   margin-top: 4.375rem;
   padding-top: 1.875rem;
@@ -1431,6 +1536,9 @@ h1 {
   .about-main {
     gap: 3rem 3.75rem;
   }
+  .achievements {
+    gap: 2.5rem 3.75rem;
+  }
   .about-asterisk {
     right: 0;
     width: 2.8125rem;
@@ -1704,6 +1812,25 @@ h1 {
   }
   .about-portrait {
     aspect-ratio: 4 / 5;
+  }
+  .achievements {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'head'
+      'photos'
+      'awards';
+    gap: 2.1875rem;
+    margin-top: 4.375rem;
+    padding-top: 2.5rem;
+  }
+  .achievements-head h2 {
+    font-size: 2.75rem;
+  }
+  .achievement-photos {
+    gap: 0.5rem;
+  }
+  .award-list h3 {
+    font-size: 1.125rem;
   }
   .about-heading :is(h1, h2) {
     font-size: 3.75rem;

@@ -91,6 +91,51 @@ export const skills = [
   },
 ];
 
+// Senior high research awards, all from the 5th Josenian SHS Research Summit (April 2023).
+export const achievements = [
+  {
+    title: 'Best Oral Presenter',
+    meta: '“People” category · April 2023',
+    description:
+      'Awarded for achieving the highest overall evaluation score among finalists in research presentation and defense.',
+  },
+  {
+    title: 'Panelists’ Choice Award',
+    meta: '“People” category · April 2023',
+    description:
+      'Recognized for exceptional research contributions through the feasibility study of SenSOIL, a smart farming soil nutrient sensor.',
+  },
+  {
+    title: 'HARMONY Evaluators’ Choice Award',
+    meta: 'Team Sereen · April 2023',
+    description:
+      'Recognized as the STEM capstone team receiving the highest number of evaluator votes for its research project.',
+  },
+];
+
+export const achievementPhotos = [
+  {
+    src: assetUrl('assets/SHS-RESEARCH-web.jpg'),
+    alt: 'Team Sereen at the SenSOIL research booth, beside the feasibility study poster',
+    area: 'booth',
+  },
+  {
+    src: assetUrl('assets/SHS-Awards-2-web.jpg'),
+    alt: 'The team outside the University of San Jose–Recoletos holding their certificates and medals',
+    area: 'campus',
+  },
+  {
+    src: assetUrl('assets/SHS-Award-web.jpg'),
+    alt: 'The team on stage at the 5th Josenian SHS Research Summit with their awards',
+    area: 'stage',
+  },
+  {
+    src: assetUrl('assets/SenSOIL-web.jpg'),
+    alt: 'The SenSOIL device modeled in Fusion 360: a control box wired to an NPK soil probe',
+    area: 'model',
+  },
+];
+
 export const socials = [
   { name: 'GitHub', url: 'https://github.com/JoelNavales' },
   { name: 'LinkedIn', url: 'https://www.linkedin.com/in/joel-franco-v-navales-5bba6831a/' },

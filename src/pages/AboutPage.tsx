@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { motion } from 'motion/react';
-import { socials } from '../data';
+import { achievementPhotos, achievements, socials } from '../data';
 import { Arrow, Asterisk } from '../components/Icons';
 import AboutVisual from '../components/AboutVisual';
 import LineReveal from '../components/LineReveal';
@@ -74,6 +74,59 @@ export default function AboutPage() {
             </motion.a>
           </motion.div>
         </div>
+        <motion.div
+          className="achievements"
+          initial="hidden"
+          whileInView="show"
+          viewport={inView}
+          variants={staggered(0.08)}
+        >
+          <div className="achievements-head">
+            <motion.span className="eyebrow" variants={fadeUp}>
+              SENIOR HIGH · RESEARCH & RECOGNITION
+            </motion.span>
+            <h2>
+              <LineReveal
+                lines={[
+                  'It started',
+                  <>
+                    in the <span className="serif-word">soil.</span>
+                  </>,
+                ]}
+              />
+            </h2>
+            <motion.p variants={fadeUp}>
+              For our STEM capstone, Team Sereen ran a feasibility study on <strong>SenSOIL</strong>
+              , a smart farming soil nutrient sensor meant to support farmers in Brgy. Taptap, Cebu
+              City. We presented and defended it at the 5th Josenian SHS Research Summit at the
+              University of San Jose–Recoletos, and came home with three awards.
+            </motion.p>
+          </div>
+          <motion.div className="achievement-photos" variants={fadeUp}>
+            {achievementPhotos.map((photo) => (
+              <img
+                key={photo.area}
+                className={`photo-${photo.area}`}
+                src={photo.src}
+                alt={photo.alt}
+                loading="lazy"
+                decoding="async"
+              />
+            ))}
+          </motion.div>
+          <ol className="award-list">
+            {achievements.map((award, index) => (
+              <motion.li key={award.title} variants={fadeUp}>
+                <span className="award-number mono">0{index + 1}</span>
+                <div>
+                  <h3>{award.title}</h3>
+                  <span className="award-meta mono">{award.meta}</span>
+                  <p>{award.description}</p>
+                </div>
+              </motion.li>
+            ))}
+          </ol>
+        </motion.div>
         <motion.div
           className="beyond"
           initial="hidden"
