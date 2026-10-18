@@ -89,6 +89,7 @@ export default function WorkList({
           {projects.map((project, index) => (
             <img
               key={project.id}
+              className={project.screenshot ? 'is-screenshot' : undefined}
               src={project.image}
               alt=""
               style={{ opacity: index === active ? 1 : 0 }}

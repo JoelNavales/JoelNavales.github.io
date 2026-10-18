@@ -79,10 +79,14 @@ export default function ProjectDialog({
           >
             ×
           </button>
-          <div className="dialog-art">
+          <div className={`dialog-art${project.screenshot ? ' is-screenshot' : ''}`}>
             <motion.img
               src={project.image}
-              alt={`Concept illustration for ${project.title}`}
+              alt={
+                project.screenshot
+                  ? `Title screen of ${project.title}`
+                  : `Concept illustration for ${project.title}`
+              }
               initial={{ scale: 1.1 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.9, ease: easeOut }}
@@ -106,9 +110,11 @@ export default function ProjectDialog({
                 <span key={tech}>{tech}</span>
               ))}
             </motion.div>
-            <motion.p className="art-disclosure" variants={fadeUp}>
-              Cover artwork is a concept illustration, not an application screenshot.
-            </motion.p>
+            {!project.screenshot && (
+              <motion.p className="art-disclosure" variants={fadeUp}>
+                Cover artwork is a concept illustration, not an application screenshot.
+              </motion.p>
+            )}
             <motion.div className="dialog-actions" variants={fadeUp}>
               <a
                 className="button button-dark"

@@ -825,6 +825,12 @@ h1 {
   color: var(--muted);
   min-height: 3rem;
 }
+.project-card > p.project-credit {
+  min-height: 0;
+  margin-top: 0.625rem;
+  font-size: 0.6875rem;
+  color: var(--ink);
+}
 .tags {
   display: flex;
   flex-wrap: wrap;
@@ -1495,6 +1501,9 @@ h1 {
   flex-wrap: wrap;
   align-items: center;
   gap: 1rem 1.625rem;
+}
+.tags + .dialog-actions {
+  margin-top: 1.5rem;
 }
 .project-dialog[open]::backdrop {
   animation: backdrop-in 0.35s ease-out;
@@ -2355,6 +2364,16 @@ h1 {
   height: 100%;
   object-fit: cover;
   transition: opacity 0.25s ease;
+}
+/* Screenshots are shown whole on a dark backdrop instead of being cropped like the artwork. */
+.is-screenshot,
+.work-preview img.is-screenshot {
+  background: #1f1b22;
+}
+.project-cover.is-screenshot img,
+.dialog-art.is-screenshot img,
+.work-preview img.is-screenshot {
+  object-fit: contain;
 }
 @media (hover: none) {
   .work-preview {

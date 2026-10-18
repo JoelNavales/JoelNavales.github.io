@@ -38,7 +38,7 @@ export default function ProjectCover({
 
   return (
     <motion.button
-      className="project-cover"
+      className={`project-cover${project.screenshot ? ' is-screenshot' : ''}`}
       onClick={onOpen}
       onPointerMove={track}
       onPointerLeave={reset}
@@ -47,7 +47,11 @@ export default function ProjectCover({
     >
       <motion.img
         src={project.image}
-        alt={`Original concept artwork for ${project.title}`}
+        alt={
+          project.screenshot
+            ? `Title screen of ${project.title}`
+            : `Original concept artwork for ${project.title}`
+        }
         loading="lazy"
         width="900"
         height="650"
@@ -55,7 +59,7 @@ export default function ProjectCover({
       />
       <span className="project-status">
         <span />
-        {project.status} <em>· concept art</em>
+        {project.status} {!project.screenshot && <em>· concept art</em>}
       </span>
       <span className="project-open">
         <Arrow diagonal />

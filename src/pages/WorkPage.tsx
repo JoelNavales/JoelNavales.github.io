@@ -61,6 +61,9 @@ export default function WorkPage() {
                 </button>
               </h2>
               <p>{project.description}</p>
+              {project.partner && (
+                <p className="project-credit mono">Built with {project.partner}</p>
+              )}
               <div className="tags">
                 {project.stack.map((tech) => (
                   <span key={tech}>{tech}</span>
@@ -81,7 +84,7 @@ export default function WorkPage() {
         >
           <div>
             <motion.span className="eyebrow" variants={fadeUp}>
-             ALWAYS LEARNING
+              ALWAYS LEARNING
             </motion.span>
             <h2>
               <LineReveal

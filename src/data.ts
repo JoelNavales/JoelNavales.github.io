@@ -14,6 +14,9 @@ export type Project = {
   color: string;
   repo?: string;
   demo?: string;
+  // A real screenshot rather than concept art: shown whole, letterboxed, and labelled as such.
+  screenshot?: boolean;
+  partner?: string;
 };
 
 export const projects: Project[] = [
@@ -59,6 +62,23 @@ export const projects: Project[] = [
     image: assetUrl('assets/aspire.svg'),
     color: 'lavender',
     repo: 'https://github.com/senRyuu286/SE-Aspire',
+  },
+  {
+    id: 'steelbound',
+    number: '04',
+    title: 'SteelBound',
+    category: 'Game development',
+    status: 'Public repository',
+    description:
+      'A 2.5D action-platformer where a cursed knight fights to escape a shifting dungeon.',
+    detail:
+      'SteelBound is a fast-paced 2.5D action-platformer where you play as a cursed knight fighting to escape a dangerous, ever-changing dungeon. With tight combat, deadly traps, and rogue-lite progression, every run is a new challenge. Can you break the chains and survive the depths? I built it in Java with my partner, Justin B. Ramas.',
+    stack: ['Java', 'Swing'],
+    image: assetUrl('assets/SteelBound-web.jpg'),
+    color: 'lavender',
+    repo: 'https://github.com/senRyuu286/SteelBound',
+    screenshot: true,
+    partner: 'Justin B. Ramas',
   },
 ];
 
