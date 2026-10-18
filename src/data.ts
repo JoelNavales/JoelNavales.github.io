@@ -14,7 +14,7 @@ export type Project = {
   color: string;
   repo?: string;
   demo?: string;
-  // A real screenshot rather than concept art: shown whole, letterboxed, and labelled as such.
+  // A real screenshot rather than concept art, so it skips the concept-art labels.
   screenshot?: boolean;
   partner?: string;
 };
