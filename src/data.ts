@@ -45,7 +45,7 @@ export const projects: Project[] = [
     video: lockerVideo,
     videoAlt:
       'Concept promo for Locker: subjects as lockers, priority colors, the focus timer with its ambient mixer, and the study crew',
-    role: 'My capstone: designing and building the app in Flutter and Firebase.',
+    role: 'My first flutter project.',
     color: 'coral',
   },
   {
