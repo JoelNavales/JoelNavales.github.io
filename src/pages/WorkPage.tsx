@@ -66,18 +66,13 @@ export default function WorkPage() {
                   <span key={tech}>{tech}</span>
                 ))}
               </div>
-              <div className="project-links">
-                {project.demo && (
+              {project.demo && (
+                <div className="project-links">
                   <a className="text-link" href={project.demo} target="_blank" rel="noreferrer">
                     Live demo <Arrow diagonal />
                   </a>
-                )}
-                {project.repo && (
-                  <a className="text-link" href={project.repo} target="_blank" rel="noreferrer">
-                    GitHub <Arrow diagonal />
-                  </a>
-                )}
-              </div>
+                </div>
+              )}
             </motion.article>
           ))}
         </div>

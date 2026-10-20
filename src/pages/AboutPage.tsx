@@ -62,7 +62,7 @@ export default function AboutPage() {
             </motion.p>
             <motion.a
               className="text-link light-link"
-              href={socials[1].url}
+              href={socials.find((social) => social.name === 'LinkedIn')?.url}
               target="_blank"
               rel="noreferrer"
               variants={fadeUp}

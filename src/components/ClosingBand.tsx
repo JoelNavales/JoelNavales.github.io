@@ -5,11 +5,10 @@ import { fadeUp, inView, staggered } from '../lib/motion';
 import { preloadContactForm } from './QuickContact';
 import { Arrow } from './Icons';
 
-// Ends Home and Work with every way to get in touch, so a visitor who has seen enough always
+// Ends Home and Work with the ways to get in touch, so a visitor who has seen enough always
 // has a next step. About ends on the full contact form instead.
 export default function ClosingBand() {
   const openContact = useOpenContact();
-  const github = socials.find((social) => social.name === 'GitHub');
   const linkedin = socials.find((social) => social.name === 'LinkedIn');
 
   return (
@@ -39,11 +38,6 @@ export default function ClosingBand() {
           >
             Send a message <Arrow />
           </button>
-          {github && (
-            <a className="text-link" href={github.url} target="_blank" rel="noreferrer">
-              GitHub <Arrow diagonal />
-            </a>
-          )}
           {linkedin && (
             <a className="text-link" href={linkedin.url} target="_blank" rel="noreferrer">
               LinkedIn <Arrow diagonal />

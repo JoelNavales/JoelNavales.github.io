@@ -19,7 +19,6 @@ export type Project = {
   position?: string;
   // What I did on the project, shown on the cards so it doesn't hide in the dialog.
   role: string;
-  repo?: string;
   demo?: string;
 };
 
@@ -38,7 +37,6 @@ export const projects: Project[] = [
     imageAlt: 'Concept illustration for Locker',
     role: 'My capstone: designing and building the app in Flutter and Firebase.',
     color: 'coral',
-    repo: 'https://github.com/JoelNavales/locker',
   },
   {
     id: 'clario',
@@ -56,7 +54,6 @@ export const projects: Project[] = [
     position: '50% 0%',
     role: 'Built the whole app: mood log, habit streaks, tasks and themes.',
     color: 'green',
-    repo: 'https://github.com/JoelNavales/clario-v1',
     demo: 'https://joelnavales.github.io/clario-v1/',
   },
   {
@@ -64,23 +61,22 @@ export const projects: Project[] = [
     number: '03',
     title: 'Aspire',
     category: 'Mobile app & UI/UX',
-    status: 'Open source',
+    status: 'Team project',
     description: 'Helping students connect their interests and strengths to future career paths.',
     detail:
-      'Aspire is a team-built career guidance app for students. My contribution focused on interface design and Flutter UI/UX: making assessments and career exploration approachable. The app brings together quizzes about interests, skills, personality, and work values, then uses Google Gemini to suggest career paths with explanations and required skills. Built with Flutter and Dart, it uses Firebase Authentication and Cloud Firestore for accounts and saved progress. The public repository includes the app source and project documentation.',
+      'Aspire is a team-built career guidance app for students. My contribution focused on interface design and Flutter UI/UX: making assessments and career exploration approachable. The app brings together quizzes about interests, skills, personality, and work values, then uses Google Gemini to suggest career paths with explanations and required skills. Built with Flutter and Dart, it uses Firebase Authentication and Cloud Firestore for accounts and saved progress.',
     stack: ['Flutter', 'Dart', 'Firebase', 'Gemini AI'],
     image: assetUrl('assets/aspire.svg'),
     imageAlt: 'Concept illustration for Aspire',
     role: 'Team project. My part: interface design and the Flutter UI.',
     color: 'lavender',
-    repo: 'https://github.com/senRyuu286/SE-Aspire',
   },
   {
     id: 'steelbound',
     number: '04',
     title: 'SteelBound',
     category: 'Game development',
-    status: 'Open source',
+    status: 'Team project',
     description:
       'A 2.5D action-platformer where a cursed knight fights to escape a shifting dungeon.',
     detail:
@@ -92,7 +88,6 @@ export const projects: Project[] = [
     position: '50% 25%',
     role: 'Built in Java with my partner, Justin B. Ramas.',
     color: 'lavender',
-    repo: 'https://github.com/senRyuu286/SteelBound',
   },
 ];
 
@@ -167,7 +162,6 @@ export const achievementPhotos: CarouselPhoto[] = [
 export const email = 'navales546@gmail.com';
 
 export const socials = [
-  { name: 'GitHub', url: 'https://github.com/JoelNavales' },
   { name: 'LinkedIn', url: 'https://www.linkedin.com/in/joel-franco-v-navales-5bba6831a/' },
   { name: 'Instagram', url: 'https://instagram.com/_joelnavales' },
   { name: 'Facebook', url: 'https://facebook.com/JoelNavales' },

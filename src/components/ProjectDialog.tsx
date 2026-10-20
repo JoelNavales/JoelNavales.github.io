@@ -117,7 +117,7 @@ export default function ProjectDialog({
                 The cover is concept art. Screenshots are coming as the app takes shape.
               </motion.p>
             )}
-            {/* The work itself leads: the live demo if there is one, otherwise the code. */}
+            {/* The work itself leads when there's a live demo; otherwise asking about it does. */}
             <motion.div className="dialog-actions" variants={fadeUp}>
               {project.demo && (
                 <a
@@ -129,19 +129,9 @@ export default function ProjectDialog({
                   Try the live demo <Arrow diagonal />
                 </a>
               )}
-              {project.repo && (
-                <a
-                  className={project.demo ? 'text-link' : 'button button-dark'}
-                  href={project.repo}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  View the code on GitHub <Arrow diagonal />
-                </a>
-              )}
               <button
                 type="button"
-                className="text-link"
+                className={project.demo ? 'text-link' : 'button button-dark'}
                 onClick={async () => {
                   await close();
                   openContact(project.title);
