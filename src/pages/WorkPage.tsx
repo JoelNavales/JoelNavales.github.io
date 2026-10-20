@@ -135,8 +135,8 @@ export default function WorkPage() {
           variants={fadeUp}
         >
           <p>
-            Happy to chat about <strong>Flutter + Firebase</strong>, getting started with{' '}
-            <strong>Laravel</strong>, or using <strong>GitHub Copilot</strong> for student projects.
+            Happy to chat about <strong>Flutter + Firebase</strong> or getting started with{' '}
+            <strong>Laravel</strong>.
           </p>
         </motion.div>
       </section>
