@@ -166,9 +166,6 @@ export const achievementPhotos: CarouselPhoto[] = [
 
 export const email = 'navales546@gmail.com';
 
-// Drop the PDF at public/assets/Joel-Navales-Resume.pdf; every résumé link points here.
-export const resumeUrl = assetUrl('assets/Joel-Navales-Resume.pdf');
-
 export const socials = [
   { name: 'GitHub', url: 'https://github.com/JoelNavales' },
   { name: 'LinkedIn', url: 'https://www.linkedin.com/in/joel-franco-v-navales-5bba6831a/' },

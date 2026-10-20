@@ -6,7 +6,7 @@ Built with **React, Vite, TypeScript, React Router, and CSS**, using **pnpm**. A
 
 ## Pages and motion
 
-- `/`: Home — an introduction that starts from the SenSOIL research, the project list, a SenSOIL awards band, and a closing band with email, résumé, and message links.
+- `/`: Home — an introduction that starts from the SenSOIL research, the project list, a SenSOIL awards band, and a closing band with email and message links.
 - `/work`: Work — projects, project dialogs, and skills.
 - `/about`: About — biography, interactive 3D interests, and contact details. `/about#contact` links directly to contact.
 
@@ -62,7 +62,7 @@ Open `http://127.0.0.1:4173/my-portfolio/`. Local development with `pnpm dev` an
 
 ## Editing content
 
-- `src/data.ts`: project details (including each project's role line), skill groups, the email and résumé links, and social links.
+- `src/data.ts`: project details (including each project's role line), skill groups, the email address, and social links.
 - `src/main.tsx`: routes and compatibility with previous section links.
 - `src/App.tsx`: shared header, footer, navigation, page titles, and focus handling.
 - `src/pages/`: Home, Work, and About content.
@@ -72,7 +72,7 @@ Open `http://127.0.0.1:4173/my-portfolio/`. Local development with `pnpm dev` an
 - `src/lib/motion.ts`: shared easing, entrance variants, and scroll-reveal settings.
 - `src/styles.css`: layout, theme, and responsive styles.
 - `src/page-transitions.css`: route transitions and their reduced-motion behavior.
-- `public/assets/`: concept illustrations, project screenshots, photos, and locally hosted fonts, with font licenses. Add the résumé here as `Joel-Navales-Resume.pdf`.
+- `public/assets/`: concept illustrations, project screenshots, photos, and locally hosted fonts, with font licenses.
 - `public/assets/pfp-*.webp` and `pfp-800.jpg`: the Home page portrait at web sizes, made from `pfp.jpg`. To swap the photo, replace `pfp.jpg` and regenerate them:
 
   ```sh

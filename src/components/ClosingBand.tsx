@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { email, resumeUrl, socials } from '../data';
+import { email, socials } from '../data';
 import { useOpenContact } from '../lib/contact';
 import { fadeUp, inView, staggered } from '../lib/motion';
 import { preloadContactForm } from './QuickContact';
@@ -23,7 +23,7 @@ export default function ClosingBand() {
     >
       <motion.div className="closing-copy" variants={fadeUp}>
         <h2 id="closing-title">Want to work together?</h2>
-        <p>Email me, send a quick message, or grab my résumé.</p>
+        <p>Email me or send a quick message.</p>
       </motion.div>
       <motion.div className="closing-actions" variants={fadeUp}>
         <a className="closing-email" href={`mailto:${email}`}>
@@ -39,9 +39,6 @@ export default function ClosingBand() {
           >
             Send a message <Arrow />
           </button>
-          <a className="text-link" href={resumeUrl} target="_blank" rel="noreferrer">
-            Résumé (PDF) <Arrow diagonal />
-          </a>
           {github && (
             <a className="text-link" href={github.url} target="_blank" rel="noreferrer">
               GitHub <Arrow diagonal />

@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { motion } from 'motion/react';
-import { achievementPhotos, achievements, email, resumeUrl, socials } from '../data';
+import { achievementPhotos, achievements, email, socials } from '../data';
 import { Arrow } from '../components/Icons';
 import AboutVisual from '../components/AboutVisual';
 import LineReveal from '../components/LineReveal';
@@ -177,9 +177,6 @@ export default function AboutPage() {
             <motion.div className="contact-direct" variants={fadeUp}>
               <a className="closing-email" href={`mailto:${email}`}>
                 {email}
-              </a>
-              <a className="text-link" href={resumeUrl} target="_blank" rel="noreferrer">
-                Résumé (PDF) <Arrow diagonal />
               </a>
             </motion.div>
           </div>
