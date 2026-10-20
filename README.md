@@ -83,7 +83,28 @@ Open `http://127.0.0.1:4173/my-portfolio/`. Local development with `pnpm dev` an
 
 - `index.html`: page title, description, and sharing metadata.
 
-Clario and SteelBound covers are real screenshots; Locker and Aspire covers are concept artwork and are labeled as such. Locker is marked in development. The site doesn't link to any source code, live demo, or GitHub page. Aspire's description credits Joel's interface design and Flutter UI/UX contribution to the team-built app. There are no invented project metrics, testimonials, or employment details.
+## Project videos
+
+Video masters live in `media/videos/`, named after the project (`locker.mp4`). They are not served; `pnpm videos` encodes each one into `public/assets/videos/`:
+
+- `<name>.webm`: AV1 with Opus audio, smallest, picked by browsers that can decode AV1.
+- `<name>.mp4`: H.264 with AAC audio, the fallback for everything else (older Safari included).
+- `<name>-poster.jpg`: one frame, shown in the project dialog before the video loads.
+
+It also writes `src/videos.json` with each video's files, size, and length. Encoding needs ffmpeg (`brew install ffmpeg`); the outputs are committed, so the GitHub Pages build doesn't encode anything.
+
+To add a video for a project:
+
+1. Drop the master into `media/videos/`, e.g. `media/videos/clario.mp4` (MP4, MOV, M4V, WebM, or MKV).
+2. Optionally pick the poster frame and size in `media/videos/videos.json`: `"clario": { "poster": 4.2 }` takes the poster 4.2 seconds in (otherwise a fifth of the way through), and `"width": 1280` caps the output width (default 1920, never upscaled).
+3. Run `pnpm videos`. Only new or changed masters are encoded; `pnpm videos clario` does one, `pnpm videos --force` redoes all.
+4. In `src/data.ts`, set the project's `video: projectVideo('clario')` and a `videoAlt` describing what it shows. The project's `image` stays the thumbnail; to use the poster frame instead, set `image` to the video's `poster`.
+
+On the Work page cards and the Home page's hover preview, the project's image is the thumbnail and the video plays muted while the mouse is over it (not on touch screens or with reduced motion). Opening the project plays the video once, whole (not cropped), with sound and controls. If the browser blocks sound it plays muted, and with reduced motion it waits for play. Deleting a master and rerunning removes it from `src/videos.json`; delete its files in `public/assets/videos/` by hand.
+
+Aspire's video was added without ffmpeg, so it is served as uploaded (H.264 MP4, no AV1 copy) with its entry in `src/videos.json` written by hand. Running `pnpm videos` with ffmpeg installed encodes it like the others.
+
+Clario and SteelBound covers are real screenshots; Locker and Aspire covers are concept artwork and are labeled as such. Locker and Aspire also have promo videos, which their dialogs say are promos, not recordings of the apps. Locker is marked in development. The site doesn't link to any source code, live demo, or GitHub page. Aspire's description credits Joel's interface design and Flutter UI/UX contribution to the team-built app. There are no invented project metrics, testimonials, or employment details.
 
 ## Contact form
 

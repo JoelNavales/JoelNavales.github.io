@@ -1,0 +1,36 @@
+{
+  "aspire": {
+    "width": 1920,
+    "height": 1080,
+    "duration": 25,
+    "audio": true,
+    "poster": "assets/videos/aspire-poster.jpg",
+    "sources": [
+      {
+        "src": "assets/videos/aspire.mp4",
+        "type": "video/mp4"
+      }
+    ]
+  },
+  "locker": {
+    "width": 1920,
+    "height": 1080,
+    "duration": 25,
+    "audio": true,
+    "poster": "assets/videos/locker-poster.jpg",
+    "sources": [
+      {
+        "src": "assets/videos/locker.webm",
+        "type": "video/webm; codecs=\"av01.0.08M.08, opus\""
+      },
+      {
+        "src": "assets/videos/locker.mp4",
+        "type": "video/mp4; codecs=\"avc1.640028, mp4a.40.2\""
+      }
+    ],
+    "settings": {
+      "width": 1920,
+      "poster": 5.5
+    }
+  }
+}

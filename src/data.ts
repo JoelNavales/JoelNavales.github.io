@@ -1,5 +1,6 @@
 import type { CarouselPhoto } from './components/PhotoCarousel';
 import { assetUrl } from './lib/assets';
+import { projectVideo, type ProjectVideo } from './lib/videos';
 
 export type Project = {
   id: string;
@@ -20,7 +21,13 @@ export type Project = {
   // What I did on the project, shown on the cards so it doesn't hide in the dialog.
   role: string;
   demo?: string;
+  // Plays on hover over the cover and in the project dialog. See `pnpm videos`.
+  video?: ProjectVideo;
+  videoAlt?: string;
 };
+
+const lockerVideo = projectVideo('locker');
+const aspireVideo = projectVideo('aspire');
 
 export const projects: Project[] = [
   {
@@ -35,6 +42,9 @@ export const projects: Project[] = [
     stack: ['Flutter', 'Dart', 'Firebase'],
     image: assetUrl('assets/locker.svg'),
     imageAlt: 'Concept illustration for Locker',
+    video: lockerVideo,
+    videoAlt:
+      'Concept promo for Locker: subjects as lockers, priority colors, the focus timer with its ambient mixer, and the study crew',
     role: 'My capstone: designing and building the app in Flutter and Firebase.',
     color: 'coral',
   },
@@ -67,6 +77,9 @@ export const projects: Project[] = [
     stack: ['Flutter', 'Dart', 'Firebase', 'Gemini AI'],
     image: assetUrl('assets/aspire.svg'),
     imageAlt: 'Concept illustration for Aspire',
+    video: aspireVideo,
+    videoAlt:
+      'Promo for Aspire: the skill assessment quiz, Gemini AI analyzing the results, and the student’s top career matches',
     role: 'Team project. My part: interface design and the Flutter UI.',
     color: 'lavender',
   },

@@ -1,10 +1,13 @@
 import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from 'motion/react';
+import { useState } from 'react';
 import type { PointerEvent } from 'react';
 import type { Project } from '../data';
 import { followSpring } from '../lib/motion';
 import { Arrow } from './Icons';
+import PreviewVideo from './PreviewVideo';
 
 // The card tilts toward the mouse while the artwork drifts the other way, for a little depth.
+// A project with a video plays a muted preview of it while the mouse is over the card.
 export default function ProjectCover({
   project,
   onOpen,
@@ -21,6 +24,7 @@ export default function ProjectCover({
   const artX = useSpring(useTransform(pointerX, [0, 1], [5, -5]), followSpring);
   const artY = useSpring(useTransform(pointerY, [0, 1], [4, -4]), followSpring);
   const artScale = useTransform(hover, [0, 1], [1.03, 1.08]);
+  const [previewing, setPreviewing] = useState(false);
 
   function track(event: PointerEvent<HTMLButtonElement>) {
     if (reduced || event.pointerType !== 'mouse') return;
@@ -34,6 +38,7 @@ export default function ProjectCover({
     pointerX.set(0.5);
     pointerY.set(0.5);
     hover.set(0);
+    setPreviewing(false);
   }
 
   return (
@@ -42,6 +47,9 @@ export default function ProjectCover({
     <motion.button
       className="project-cover"
       onClick={onOpen}
+      onPointerEnter={(event) => {
+        if (!reduced && event.pointerType === 'mouse') setPreviewing(true);
+      }}
       onPointerMove={track}
       onPointerLeave={reset}
       tabIndex={-1}
@@ -56,6 +64,14 @@ export default function ProjectCover({
         height="650"
         style={{ x: artX, y: artY, scale: artScale, objectPosition: project.position }}
       />
+      {project.video && !reduced && (
+        <PreviewVideo
+          video={project.video}
+          playing={previewing}
+          className="project-cover-video"
+          style={{ x: artX, y: artY, scale: artScale, objectPosition: project.position }}
+        />
+      )}
       <span className="project-status">
         <span />
         {project.status} {!project.screenshot && <em>· concept art</em>}

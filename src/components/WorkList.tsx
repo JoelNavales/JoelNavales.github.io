@@ -4,12 +4,14 @@ import { motion, useReducedMotion, useSpring, useTransform, useVelocity } from '
 import type { Project } from '../data';
 import { easeOut, fadeUp, inView, staggered } from '../lib/motion';
 import { Arrow } from './Icons';
+import PreviewVideo from './PreviewVideo';
 
 // Overdamped, so the preview trails the pointer without wobbling.
 const trail = { stiffness: 300, damping: 34, mass: 0.6 };
 
 // Project rows. With a mouse, the hovered project's cover floats beside the pointer and leans
-// into the direction of travel; on touch screens, where nothing hovers, each row shows it inline.
+// into the direction of travel, playing a muted preview if the project has a video; on touch
+// screens, where nothing hovers, each row shows the cover inline.
 export default function WorkList({
   projects,
   onOpen,
@@ -103,6 +105,17 @@ export default function WorkList({
               style={{ opacity: index === active ? 1 : 0, objectPosition: project.position }}
             />
           ))}
+          {projects.map(
+            (project, index) =>
+              project.video && (
+                <PreviewVideo
+                  key={project.id}
+                  video={project.video}
+                  playing={index === active}
+                  style={{ objectPosition: project.position }}
+                />
+              ),
+          )}
         </motion.div>
       )}
     </>

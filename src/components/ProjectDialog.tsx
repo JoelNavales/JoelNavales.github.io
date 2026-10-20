@@ -15,6 +15,7 @@ export default function ProjectDialog({
   const [dialog, animate] = useAnimate<HTMLDialogElement>();
   const reduced = useReducedMotion();
   const closing = useRef(false);
+  const video = useRef<HTMLVideoElement>(null);
   const openContact = useOpenContact();
 
   useEffect(() => {
@@ -36,10 +37,23 @@ export default function ProjectDialog({
     };
   }, [project, dialog, animate, reduced]);
 
+  // Opening the project was a click, so the video can usually start with sound. If the browser
+  // still blocks that, it plays muted and the controls unmute it. Reduced motion waits for play.
+  useEffect(() => {
+    const element = video.current;
+    if (!project?.video || !element || reduced) return;
+    element.muted = false;
+    element.play().catch(() => {
+      element.muted = true;
+      element.play().catch(() => {});
+    });
+  }, [project, reduced]);
+
   // Play the exit before the native dialog closes, so it doesn't vanish mid-frame.
   async function close() {
     if (closing.current) return;
     closing.current = true;
+    video.current?.pause();
     dialog.current.dataset.closing = '';
     if (!reduced)
       await animate(
@@ -81,16 +95,39 @@ export default function ProjectDialog({
           >
             ×
           </button>
-          <div className="dialog-art">
-            <motion.img
-              src={project.image}
-              alt={project.imageAlt}
-              style={{ objectPosition: project.position }}
-              initial={{ scale: 1.1 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 0.9, ease: easeOut }}
-            />
-          </div>
+          {project.video ? (
+            // Shown whole rather than cropped, since promos carry text to the edges.
+            <div
+              className="dialog-art dialog-video"
+              style={{ aspectRatio: `${project.video.width} / ${project.video.height}` }}
+            >
+              <video
+                ref={video}
+                poster={project.video.poster}
+                width={project.video.width}
+                height={project.video.height}
+                aria-label={project.videoAlt ?? project.imageAlt}
+                playsInline
+                controls
+                preload={reduced ? 'none' : 'auto'}
+              >
+                {project.video.sources.map((source) => (
+                  <source key={source.src} src={source.src} type={source.type} />
+                ))}
+              </video>
+            </div>
+          ) : (
+            <div className="dialog-art">
+              <motion.img
+                src={project.image}
+                alt={project.imageAlt}
+                style={{ objectPosition: project.position }}
+                initial={{ scale: 1.1 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 0.9, ease: easeOut }}
+              />
+            </div>
+          )}
           <motion.div
             className="dialog-copy"
             initial="hidden"
@@ -114,7 +151,10 @@ export default function ProjectDialog({
             </motion.div>
             {!project.screenshot && (
               <motion.p className="art-disclosure" variants={fadeUp}>
-                The cover is concept art. Screenshots are coming as the app takes shape.
+                {project.video
+                  ? 'The video is a promo, not a recording of the app.'
+                  : 'The cover is concept art.'}{' '}
+                Screenshots are coming as the app takes shape.
               </motion.p>
             )}
             {/* The work itself leads when there's a live demo; otherwise asking about it does. */}
