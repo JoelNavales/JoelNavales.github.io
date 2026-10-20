@@ -80,7 +80,7 @@ export const projects: Project[] = [
     video: aspireVideo,
     videoAlt:
       'Promo for Aspire: the skill assessment quiz, Gemini AI analyzing the results, and the student’s top career matches',
-    role: 'Team project. My part: interface design and the Flutter UI.',
+    role: 'Authored by: John Anthony Romeo, Justin B Ramas, Joel Franco V Navales',
     color: 'lavender',
   },
   {
