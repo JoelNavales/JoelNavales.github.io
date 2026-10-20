@@ -43,7 +43,7 @@ export const projects: Project[] = [
     number: '02',
     title: 'Clario',
     category: 'Web development',
-    status: 'Live demo',
+    status: 'Version 1',
     description: 'A fast, offline-ready life dashboard for tracking mood, habits, and tasks.',
     detail:
       'Clario v1 is a life dashboard built with React, TypeScript, and Tailwind CSS. You log one mood a day with an optional journal note, check off habits to build streaks, and manage tasks by priority, with light, dark, and custom themes. It has no backend or accounts: everything runs in the browser and is saved to local storage, a deliberately simple first version to test the core experience before adding cloud sync.',
@@ -54,7 +54,6 @@ export const projects: Project[] = [
     position: '50% 0%',
     role: 'Built the whole app: mood log, habit streaks, tasks and themes.',
     color: 'green',
-    demo: 'https://joelnavales.github.io/clario-v1/',
   },
   {
     id: 'aspire',

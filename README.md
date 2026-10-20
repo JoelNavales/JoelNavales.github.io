@@ -83,7 +83,7 @@ Open `http://127.0.0.1:4173/my-portfolio/`. Local development with `pnpm dev` an
 
 - `index.html`: page title, description, and sharing metadata.
 
-Clario and SteelBound covers are real screenshots; Locker and Aspire covers are concept artwork and are labeled as such. Locker is marked in development and Clario links to its live demo. The site doesn't link to any source code or to GitHub. Aspire's description credits Joel's interface design and Flutter UI/UX contribution to the team-built app. There are no invented project metrics, testimonials, or employment details.
+Clario and SteelBound covers are real screenshots; Locker and Aspire covers are concept artwork and are labeled as such. Locker is marked in development. The site doesn't link to any source code, live demo, or GitHub page. Aspire's description credits Joel's interface design and Flutter UI/UX contribution to the team-built app. There are no invented project metrics, testimonials, or employment details.
 
 ## Contact form
 
