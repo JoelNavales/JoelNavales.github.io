@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { motion, useAnimate, useReducedMotion } from 'motion/react';
 import type { Project } from '../data';
+import { useOpenContact } from '../lib/contact';
 import { easeOut, fadeUp, staggered } from '../lib/motion';
 import { Arrow } from './Icons';
 
@@ -14,6 +15,7 @@ export default function ProjectDialog({
   const [dialog, animate] = useAnimate<HTMLDialogElement>();
   const reduced = useReducedMotion();
   const closing = useRef(false);
+  const openContact = useOpenContact();
 
   useEffect(() => {
     if (!project) return;
@@ -79,14 +81,11 @@ export default function ProjectDialog({
           >
             ×
           </button>
-          <div className={`dialog-art${project.screenshot ? ' is-screenshot' : ''}`}>
+          <div className="dialog-art">
             <motion.img
               src={project.image}
-              alt={
-                project.screenshot
-                  ? `Title screen of ${project.title}`
-                  : `Concept illustration for ${project.title}`
-              }
+              alt={project.imageAlt}
+              style={{ objectPosition: project.position }}
               initial={{ scale: 1.1 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.9, ease: easeOut }}
@@ -104,6 +103,9 @@ export default function ProjectDialog({
             <motion.h2 id="project-title" variants={fadeUp}>
               {project.title}
             </motion.h2>
+            <motion.p className="dialog-role" variants={fadeUp}>
+              {project.role}
+            </motion.p>
             <motion.p variants={fadeUp}>{project.detail}</motion.p>
             <motion.div className="tags" variants={fadeUp}>
               {project.stack.map((tech) => (
@@ -112,26 +114,41 @@ export default function ProjectDialog({
             </motion.div>
             {!project.screenshot && (
               <motion.p className="art-disclosure" variants={fadeUp}>
-                Cover artwork is a concept illustration, not an application screenshot.
+                The cover is concept art. Screenshots are coming as the app takes shape.
               </motion.p>
             )}
+            {/* The work itself leads: the live demo if there is one, otherwise the code. */}
             <motion.div className="dialog-actions" variants={fadeUp}>
-              <a
-                className="button button-dark"
-                href={`mailto:navales546@gmail.com?subject=${encodeURIComponent(`Let’s talk about ${project.title}`)}`}
-              >
-                Let’s talk about this <Arrow diagonal />
-              </a>
               {project.demo && (
-                <a className="text-link" href={project.demo} target="_blank" rel="noreferrer">
-                  Live demo <Arrow diagonal />
+                <a
+                  className="button button-dark"
+                  href={project.demo}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Try the live demo <Arrow diagonal />
                 </a>
               )}
               {project.repo && (
-                <a className="text-link" href={project.repo} target="_blank" rel="noreferrer">
-                  View on GitHub <Arrow diagonal />
+                <a
+                  className={project.demo ? 'text-link' : 'button button-dark'}
+                  href={project.repo}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  View the code on GitHub <Arrow diagonal />
                 </a>
               )}
+              <button
+                type="button"
+                className="text-link"
+                onClick={async () => {
+                  await close();
+                  openContact(project.title);
+                }}
+              >
+                Ask me about {project.title} <Arrow diagonal />
+              </button>
             </motion.div>
           </motion.div>
         </>

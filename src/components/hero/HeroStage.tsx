@@ -138,7 +138,7 @@ function InteractiveStage() {
   const active = hovered ?? pinned;
   const [label, text] = active
     ? captions[active]
-    : ['LIFE & CURIOSITY', 'Drag to turn. Tap to explore my interests.'];
+    : ['MY INTERESTS', 'Drag to turn. Tap an object to learn more.'];
 
   return (
     <motion.div

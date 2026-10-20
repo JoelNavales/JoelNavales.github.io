@@ -35,7 +35,7 @@ export default function HomePortrait() {
             srcSet={[480, 800, 1200]
               .map((width) => `${assetUrl(`assets/pfp-${width}.webp`)} ${width}w`)
               .join(', ')}
-            sizes="(max-width: 760px) min(88vw, 360px), (max-width: 1100px) 40vw, max(360px, 22.5vw)"
+            sizes="(max-width: 760px) 42vw, (max-width: 1100px) 40vw, max(360px, 22.5vw)"
           />
           <motion.img
             src={assetUrl('assets/pfp-800.jpg')}
@@ -49,9 +49,6 @@ export default function HomePortrait() {
       </motion.div>
       <figcaption className="home-portrait-caption">
         <span className="mono">JOEL NAVALES / CEBU, PH</span>
-        <span className="home-portrait-star" aria-hidden="true">
-          ✳
-        </span>
       </figcaption>
     </figure>
   );

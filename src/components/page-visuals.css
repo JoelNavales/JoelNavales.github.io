@@ -35,13 +35,32 @@
 }
 
 .home-portrait-caption .mono {
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
 }
 
-.home-portrait-star {
-  color: var(--coral);
-  font-size: 1.6875rem;
-  line-height: 1;
+/* On phones the portrait is a small square beside its caption, so the work isn't a full
+   screen of photo away. */
+@media (max-width: 760px) {
+  .hero-art.home-portrait {
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    width: 100%;
+    margin: 0;
+    grid-row: 1;
+  }
+  .home-portrait-frame {
+    width: 42%;
+    max-width: 10rem;
+    flex-shrink: 0;
+    aspect-ratio: 1;
+  }
+  .home-portrait-frame img {
+    object-position: 50% 18%;
+  }
+  .home-portrait-caption {
+    padding-top: 0;
+  }
 }
 
 /* Keep the existing portrait grid slot so the About layout can evolve separately. */
@@ -66,12 +85,6 @@
   border-bottom: 1px solid #4b514a;
 }
 
-.about-visual-heading > span:last-child {
-  color: var(--coral);
-  font-size: 1.5rem;
-  line-height: 1;
-}
-
 .about-visual .hero-art {
   width: 100%;
   height: auto;
@@ -91,14 +104,6 @@
 
 .about-visual .stage-caption .mono {
   color: #d3df8b;
-}
-
-.about-visual-note {
-  margin: 1.125rem 1.25rem 0;
-  padding: 0.875rem 0 1.125rem;
-  border-top: 1px solid #4b514a;
-  color: #a4ad9f;
-  font-size: 0.6875rem;
 }
 
 /* The non-WebGL illustration uses the same square panel. */

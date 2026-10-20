@@ -2,19 +2,19 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'motion/react';
 import type { Variants } from 'motion/react';
-import { projects, toolkit } from '../data';
+import { achievementPhotos, achievements, projects } from '../data';
 import type { Project } from '../data';
+import ClosingBand from '../components/ClosingBand';
 import { Arrow } from '../components/Icons';
 import HomePortrait from '../components/HomePortrait';
 import LineReveal from '../components/LineReveal';
 import Magnetic from '../components/Magnetic';
-import Marquee from '../components/Marquee';
 import ProjectDialog from '../components/ProjectDialog';
 import TypingText from '../components/TypingText';
 import WorkList from '../components/WorkList';
-import { easeOut, fadeUp, fadeUpAfter, inView, staggered } from '../lib/motion';
+import { easeOut, fadeUp, inView, staggered } from '../lib/motion';
 
-// The underline is drawn as two pen strokes, once the word "heart" has risen into place.
+// The underline is drawn as two pen strokes, once the word "apps" has risen into place.
 const stroke = (delay: number): Variants => ({
   hidden: { pathLength: 0 },
   show: { pathLength: 1, transition: { delay, duration: 0.55, ease: easeOut } },
@@ -43,10 +43,10 @@ export default function HomePage() {
       <section id="home" className="hero section-shell">
         <motion.div className="hero-topline" initial="hidden" animate="show" variants={fadeUp}>
           <span className="eyebrow">
-            <span className="status-dot" /> <TypingText text="HELLO, I’M JOEL NAVALES" />
+            <TypingText text="HELLO, I’M JOEL NAVALES" />
           </span>
           <span className="hero-location mono">
-            CEBU, PH <span className="location-star">✳</span>
+            CEBU, PH
             <span className="clock">
               <AnimatePresence initial={false}>
                 <motion.span
@@ -73,12 +73,12 @@ export default function HomePage() {
             <h1 tabIndex={-1}>
               <LineReveal
                 lines={[
-                  'A curious mind.',
-                  'A builder',
+                  'It started with',
+                  'a soil sensor.',
                   <>
-                    at{' '}
+                    Now I build{' '}
                     <span className="heart-word">
-                      heart
+                      apps
                       <svg
                         viewBox="0 0 270 20"
                         preserveAspectRatio="none"
@@ -98,9 +98,9 @@ export default function HomePage() {
               />
             </h1>
             <motion.p variants={fadeUp}>
-              I turn ideas into web and mobile experiences.
-              <br className="desktop-break" /> A fourth-year BSIT student, learning by building
-              <br className="desktop-break" /> and caring about the little details.
+              In senior high, my team’s research on SenSOIL, a soil nutrient sensor for farmers in
+              Brgy. Taptap, Cebu, won three awards. Now I’m a fourth-year BSIT student building web
+              and mobile apps with Flutter, Laravel, React and Firebase.
             </motion.p>
             <motion.div className="hero-actions" variants={fadeUp}>
               <Magnetic>
@@ -108,35 +108,14 @@ export default function HomePage() {
                   Explore my work <Arrow />
                 </Link>
               </Magnetic>
-              <Link className="text-link" to="/about" viewTransition>
-                A little about me <span aria-hidden="true">↘</span>
+              <Link className="text-link" to="/about#sensoil" viewTransition>
+                The SenSOIL story <Arrow diagonal />
               </Link>
             </motion.div>
           </motion.div>
           <HomePortrait />
         </div>
-        <motion.div
-          className="hero-bottom"
-          initial="hidden"
-          animate="show"
-          variants={fadeUpAfter(0.6)}
-        >
-          <span className="mono">CODE. DESIGN. LEARN. REPEAT.</span>
-          <Link to="/work" viewTransition className="scroll-cue mono">
-            NEXT: MY WORK <span aria-hidden="true">↗</span>
-          </Link>
-        </motion.div>
       </section>
-
-      <motion.div
-        className="tool-strip"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.7, duration: 0.6 }}
-      >
-        <span className="mono">MY EVERYDAY TOOLKIT</span>
-        <Marquee items={toolkit} />
-      </motion.div>
 
       <section className="home-work section-shell section-space" aria-labelledby="home-work-title">
         <motion.div
@@ -157,6 +136,54 @@ export default function HomePage() {
         </motion.div>
         <WorkList projects={projects} onOpen={setSelectedProject} />
       </section>
+
+      <motion.section
+        className="home-sensoil section-shell section-space"
+        aria-labelledby="home-sensoil-title"
+        initial="hidden"
+        whileInView="show"
+        viewport={inView}
+        variants={staggered(0.08)}
+      >
+        <motion.figure className="home-sensoil-photo" variants={fadeUp}>
+          <img
+            src={achievementPhotos[0].src}
+            alt={achievementPhotos[0].alt}
+            loading="lazy"
+            width="1100"
+            height="825"
+          />
+          <figcaption>{achievementPhotos[0].caption}, April 2023</figcaption>
+        </motion.figure>
+        <div className="home-sensoil-copy">
+          <h2 id="home-sensoil-title">
+            <LineReveal
+              lines={[
+                'Three awards',
+                <>
+                  for a <span className="serif-word">soil</span> sensor.
+                </>,
+              ]}
+            />
+          </h2>
+          <motion.p variants={fadeUp}>
+            Team Sereen’s feasibility study on SenSOIL, a smart farming sensor for soil nutrients,
+            took three prizes at the 5th Josenian SHS Research Summit.
+          </motion.p>
+          <motion.ul className="home-sensoil-awards" variants={fadeUp}>
+            {achievements.map((award) => (
+              <li key={award.title}>{award.title}</li>
+            ))}
+          </motion.ul>
+          <motion.div variants={fadeUp}>
+            <Link className="text-link" to="/about#sensoil" viewTransition>
+              Photos and the full story <Arrow diagonal />
+            </Link>
+          </motion.div>
+        </div>
+      </motion.section>
+
+      <ClosingBand />
 
       <ProjectDialog project={selectedProject} onClose={() => setSelectedProject(null)} />
     </div>

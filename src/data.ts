@@ -12,11 +12,15 @@ export type Project = {
   stack: string[];
   image: string;
   color: string;
+  // Describes the cover image. A real screenshot also sets `screenshot`, which drops the
+  // concept-art label, and `position` to aim the crop at the part of the screen that matters.
+  imageAlt: string;
+  screenshot?: boolean;
+  position?: string;
+  // What I did on the project, shown on the cards so it doesn't hide in the dialog.
+  role: string;
   repo?: string;
   demo?: string;
-  // A real screenshot rather than concept art, so it skips the concept-art labels.
-  screenshot?: boolean;
-  partner?: string;
 };
 
 export const projects: Project[] = [
@@ -31,6 +35,8 @@ export const projects: Project[] = [
       'Locker is my capstone project: a mobile study app built with Flutter and Firebase, where each subject becomes a locker you unlock. It’s being designed around priority colors that flag what’s urgent across lockers, the calendar, and tasks, a focus timer with an ambient sound mixer, and a study crew that keeps you accountable. It’s still in development.',
     stack: ['Flutter', 'Dart', 'Firebase'],
     image: assetUrl('assets/locker.svg'),
+    imageAlt: 'Concept illustration for Locker',
+    role: 'My capstone: designing and building the app in Flutter and Firebase.',
     color: 'coral',
     repo: 'https://github.com/JoelNavales/locker',
   },
@@ -44,7 +50,11 @@ export const projects: Project[] = [
     detail:
       'Clario v1 is a life dashboard built with React, TypeScript, and Tailwind CSS. You log one mood a day with an optional journal note, check off habits to build streaks, and manage tasks by priority, with light, dark, and custom themes. It has no backend or accounts: everything runs in the browser and is saved to local storage, a deliberately simple first version to test the core experience before adding cloud sync.',
     stack: ['React', 'TypeScript', 'Tailwind CSS'],
-    image: assetUrl('assets/clario.svg'),
+    image: assetUrl('assets/Clario-web.jpg'),
+    imageAlt: 'The Clario dashboard, with the day’s mood check-in, a focus timer and streak counts',
+    screenshot: true,
+    position: '50% 0%',
+    role: 'Built the whole app: mood log, habit streaks, tasks and themes.',
     color: 'green',
     repo: 'https://github.com/JoelNavales/clario-v1',
     demo: 'https://joelnavales.github.io/clario-v1/',
@@ -54,12 +64,14 @@ export const projects: Project[] = [
     number: '03',
     title: 'Aspire',
     category: 'Mobile app & UI/UX',
-    status: 'Public repository',
+    status: 'Open source',
     description: 'Helping students connect their interests and strengths to future career paths.',
     detail:
       'Aspire is a team-built career guidance app for students. My contribution focused on interface design and Flutter UI/UX: making assessments and career exploration approachable. The app brings together quizzes about interests, skills, personality, and work values, then uses Google Gemini to suggest career paths with explanations and required skills. Built with Flutter and Dart, it uses Firebase Authentication and Cloud Firestore for accounts and saved progress. The public repository includes the app source and project documentation.',
     stack: ['Flutter', 'Dart', 'Firebase', 'Gemini AI'],
     image: assetUrl('assets/aspire.svg'),
+    imageAlt: 'Concept illustration for Aspire',
+    role: 'Team project. My part: interface design and the Flutter UI.',
     color: 'lavender',
     repo: 'https://github.com/senRyuu286/SE-Aspire',
   },
@@ -68,47 +80,41 @@ export const projects: Project[] = [
     number: '04',
     title: 'SteelBound',
     category: 'Game development',
-    status: 'Public repository',
+    status: 'Open source',
     description:
       'A 2.5D action-platformer where a cursed knight fights to escape a shifting dungeon.',
     detail:
       'SteelBound is a fast-paced 2.5D action-platformer where you play as a cursed knight fighting to escape a dangerous, ever-changing dungeon. With tight combat, deadly traps, and rogue-lite progression, every run is a new challenge. Can you break the chains and survive the depths? I built it in Java with my partner, Justin B. Ramas.',
     stack: ['Java', 'Swing'],
     image: assetUrl('assets/SteelBound-web.jpg'),
+    imageAlt: 'Title screen of SteelBound',
+    screenshot: true,
+    position: '50% 25%',
+    role: 'Built in Java with my partner, Justin B. Ramas.',
     color: 'lavender',
     repo: 'https://github.com/senRyuu286/SteelBound',
-    screenshot: true,
-    partner: 'Justin B. Ramas',
   },
 ];
-
-export const toolkit = ['Flutter', 'Laravel', 'Firebase', 'PHP', 'Figma'];
 
 export const skills = [
   {
     title: 'Build & develop',
     items: [
       'Flutter',
+      'React',
+      'TypeScript',
       'PHP',
       'Laravel',
       'Firebase',
       'Node.js',
       'Next.js',
       'Angular.js',
-      'NPM',
-      'Apache',
     ],
   },
   { title: 'Design & explore', items: ['Figma', 'Canva', 'Adobe Photoshop', 'UI/UX'] },
   {
     title: 'Learning next',
-    items: [
-      'BLoC & Clean Architecture',
-      'Laravel APIs',
-      'React',
-      'Unit testing',
-      'Maintainable code',
-    ],
+    items: ['BLoC & Clean Architecture', 'Laravel APIs', 'Unit testing'],
   },
 ];
 
@@ -157,6 +163,11 @@ export const achievementPhotos: CarouselPhoto[] = [
     caption: 'The SenSOIL device, modeled in Fusion 360',
   },
 ];
+
+export const email = 'navales546@gmail.com';
+
+// Drop the PDF at public/assets/Joel-Navales-Resume.pdf; every résumé link points here.
+export const resumeUrl = assetUrl('assets/Joel-Navales-Resume.pdf');
 
 export const socials = [
   { name: 'GitHub', url: 'https://github.com/JoelNavales' },

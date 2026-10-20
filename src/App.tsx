@@ -1,13 +1,15 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Link, NavLink, Outlet, ScrollRestoration, useLocation } from 'react-router-dom';
 import { motion, MotionConfig, useMotionValueEvent, useScroll, useSpring } from 'motion/react';
 import { Arrow } from './components/Icons';
 import QuickContact, { preloadContactForm } from './components/QuickContact';
 import Toast from './components/Toast';
+import { email } from './data';
+import { ContactContext } from './lib/contact';
 import { easeOut } from './lib/motion';
 
 const titles: Record<string, string> = {
-  '/': 'Joel Navales — Developer & Curious Creative',
+  '/': 'Joel Navales — Web & Mobile Developer',
   '/work': 'Work & Skills — Joel Navales',
   '/about': 'About & Contact — Joel Navales',
 };
@@ -23,6 +25,12 @@ export default function App() {
   useMotionValueEvent(scrollY, 'change', (latest) => setScrolled(latest > 24));
 
   const [quickOpen, setQuickOpen] = useState(false);
+  const [quickTopic, setQuickTopic] = useState<string>();
+  const openContact = useCallback((topic?: string) => {
+    preloadContactForm();
+    setQuickTopic(topic);
+    setQuickOpen(true);
+  }, []);
   const [toast, setToast] = useState<string | null>(null);
   const toastTimer = useRef<number>(undefined);
   useEffect(() => () => window.clearTimeout(toastTimer.current), []);
@@ -87,8 +95,9 @@ export default function App() {
             joel<span className="brand-dot">.</span>
             <span className="brand-slash">/</span>
             <span className="brand-label mono">
-              DEVELOPER &<br />
-              CURIOUS CREATIVE
+              WEB & MOBILE
+              <br />
+              DEVELOPER
             </span>
           </Link>
           <button
@@ -153,7 +162,7 @@ export default function App() {
                 )
                   return;
                 event.preventDefault();
-                setQuickOpen(true);
+                openContact();
               }}
             >
               Let’s talk <Arrow diagonal />
@@ -162,16 +171,23 @@ export default function App() {
         </header>
         <motion.div className="scroll-progress" style={{ scaleX: progress }} aria-hidden="true" />
       </div>
-      <main id="main" className="site-main" tabIndex={-1}>
-        <Outlet />
-      </main>
+      <ContactContext.Provider value={openContact}>
+        <main id="main" className="site-main" tabIndex={-1}>
+          <Outlet />
+        </main>
+      </ContactContext.Provider>
       <footer className="site-footer section-shell">
-        <small>© {new Date().getFullYear()} Joel Franco V. Navales. All rights reserved.</small>
-        <small className="footer-note">
-          All other trademarks and typefaces are the property of their respective owners.
-        </small>
+        <small>© {new Date().getFullYear()} Joel Franco V. Navales</small>
+        <a className="footer-email" href={`mailto:${email}`}>
+          {email}
+        </a>
       </footer>
-      <QuickContact open={quickOpen} onClose={() => setQuickOpen(false)} onSent={messageSent} />
+      <QuickContact
+        open={quickOpen}
+        topic={quickTopic}
+        onClose={() => setQuickOpen(false)}
+        onSent={messageSent}
+      />
       <Toast message={toast} />
       <ScrollRestoration />
     </MotionConfig>

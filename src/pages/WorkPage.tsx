@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { motion } from 'motion/react';
 import { projects, skills } from '../data';
 import type { Project } from '../data';
+import ClosingBand from '../components/ClosingBand';
+import { Arrow } from '../components/Icons';
 import LineReveal from '../components/LineReveal';
 import ProjectCover from '../components/ProjectCover';
 import ProjectDialog from '../components/ProjectDialog';
@@ -19,9 +21,6 @@ export default function WorkPage() {
           variants={staggered(0.1)}
         >
           <div>
-            <motion.span className="eyebrow" variants={fadeUp}>
-              02 / THINGS I’M BUILDING
-            </motion.span>
             <h1 tabIndex={-1}>
               <LineReveal
                 lines={[
@@ -61,13 +60,23 @@ export default function WorkPage() {
                 </button>
               </h2>
               <p>{project.description}</p>
-              {project.partner && (
-                <p className="project-credit mono">Built with {project.partner}</p>
-              )}
+              <p className="project-role">{project.role}</p>
               <div className="tags">
                 {project.stack.map((tech) => (
                   <span key={tech}>{tech}</span>
                 ))}
+              </div>
+              <div className="project-links">
+                {project.demo && (
+                  <a className="text-link" href={project.demo} target="_blank" rel="noreferrer">
+                    Live demo <Arrow diagonal />
+                  </a>
+                )}
+                {project.repo && (
+                  <a className="text-link" href={project.repo} target="_blank" rel="noreferrer">
+                    GitHub <Arrow diagonal />
+                  </a>
+                )}
               </div>
             </motion.article>
           ))}
@@ -83,9 +92,6 @@ export default function WorkPage() {
           variants={staggered(0.1)}
         >
           <div>
-            <motion.span className="eyebrow" variants={fadeUp}>
-              ALWAYS LEARNING
-            </motion.span>
             <h2>
               <LineReveal
                 lines={[
@@ -115,15 +121,7 @@ export default function WorkPage() {
               <motion.span className="skill-number mono" variants={rise}>
                 0{index + 1}
               </motion.span>
-              <motion.h3 variants={rise}>
-                {row.title}
-                {index === 2 && (
-                  <>
-                    {' '}
-                    <span className="tiny-star">✳</span>
-                  </>
-                )}
-              </motion.h3>
+              <motion.h3 variants={rise}>{row.title}</motion.h3>
               <div className="skill-tags">
                 {row.items.map((item) => (
                   <motion.span key={item} variants={rise}>
@@ -141,15 +139,14 @@ export default function WorkPage() {
           viewport={inView}
           variants={fadeUp}
         >
-          <span className="ask-symbol" aria-hidden="true">
-            ↳
-          </span>
           <p>
             Happy to chat about <strong>Flutter + Firebase</strong>, getting started with{' '}
             <strong>Laravel</strong>, or using <strong>GitHub Copilot</strong> for student projects.
           </p>
         </motion.div>
       </section>
+
+      <ClosingBand />
 
       <ProjectDialog project={selectedProject} onClose={() => setSelectedProject(null)} />
     </div>

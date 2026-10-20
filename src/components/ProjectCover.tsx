@@ -37,25 +37,24 @@ export default function ProjectCover({
   }
 
   return (
+    // The card's title is the keyboard and screen reader way in; this is the same action for
+    // the mouse and touch, so it stays out of the tab order instead of announcing twice.
     <motion.button
-      className={`project-cover${project.screenshot ? ' is-screenshot' : ''}`}
+      className="project-cover"
       onClick={onOpen}
       onPointerMove={track}
       onPointerLeave={reset}
-      aria-label={`Explore ${project.title}`}
+      tabIndex={-1}
+      aria-hidden="true"
       style={{ rotateX, rotateY, transformPerspective: 900 }}
     >
       <motion.img
         src={project.image}
-        alt={
-          project.screenshot
-            ? `Title screen of ${project.title}`
-            : `Original concept artwork for ${project.title}`
-        }
+        alt=""
         loading="lazy"
         width="900"
         height="650"
-        style={{ x: artX, y: artY, scale: artScale }}
+        style={{ x: artX, y: artY, scale: artScale, objectPosition: project.position }}
       />
       <span className="project-status">
         <span />

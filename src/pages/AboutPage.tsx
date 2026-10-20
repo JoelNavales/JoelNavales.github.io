@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { motion } from 'motion/react';
-import { achievementPhotos, achievements, socials } from '../data';
-import { Arrow, Asterisk } from '../components/Icons';
+import { achievementPhotos, achievements, email, resumeUrl, socials } from '../data';
+import { Arrow } from '../components/Icons';
 import AboutVisual from '../components/AboutVisual';
 import LineReveal from '../components/LineReveal';
 import PhotoCarousel from '../components/PhotoCarousel';
@@ -21,9 +21,6 @@ export default function AboutPage() {
             animate="show"
             variants={staggered(0.09)}
           >
-            <motion.span className="eyebrow" variants={fadeUp}>
-              03 / THE PERSON BEHIND THE CODE
-            </motion.span>
             <h1 tabIndex={-1}>
               <LineReveal
                 lines={[
@@ -32,11 +29,10 @@ export default function AboutPage() {
                   <span className="serif-word">curiosity.</span>,
                 ]}
               />
-              <Asterisk className="about-asterisk" />
             </h1>
             <motion.div className="education-label" variants={fadeUp}>
               <span className="education-icon" aria-hidden="true">
-                ↗
+                <Arrow diagonal />
               </span>
               <span>
                 BS INFORMATION TECHNOLOGY
@@ -76,6 +72,8 @@ export default function AboutPage() {
           </motion.div>
         </div>
         <motion.div
+          id="sensoil"
+          tabIndex={-1}
           className="achievements"
           initial="hidden"
           whileInView="show"
@@ -83,9 +81,6 @@ export default function AboutPage() {
           variants={staggered(0.08)}
         >
           <div className="achievements-head">
-            <motion.span className="eyebrow" variants={fadeUp}>
-              SENIOR HIGH · RESEARCH & RECOGNITION
-            </motion.span>
             <h2>
               <LineReveal
                 lines={[
@@ -97,10 +92,11 @@ export default function AboutPage() {
               />
             </h2>
             <motion.p variants={fadeUp}>
-              For our STEM capstone, Team Sereen ran a feasibility study on <strong>SenSOIL</strong>
-              , a smart farming soil nutrient sensor meant to support farmers in Brgy. Taptap, Cebu
-              City. We presented and defended it at the 5th Josenian SHS Research Summit at the
-              University of San Jose–Recoletos, and came home with three awards.
+              For our senior high STEM capstone, Team Sereen ran a feasibility study on{' '}
+              <strong>SenSOIL</strong>, a smart farming soil nutrient sensor meant to support
+              farmers in Brgy. Taptap, Cebu City. We presented and defended it at the 5th Josenian
+              SHS Research Summit at the University of San Jose–Recoletos, and came home with three
+              awards.
             </motion.p>
           </div>
           <motion.div className="achievement-photos" variants={fadeUp}>
@@ -155,10 +151,6 @@ export default function AboutPage() {
       </section>
 
       <section id="contact" tabIndex={-1} className="contact section-shell section-space">
-        <div className="contact-top">
-          <span className="eyebrow">GOOD THINGS START WITH A HELLO</span>
-          <span className="mono">LET’S CONNECT ↙</span>
-        </div>
         <motion.div
           className="contact-main"
           initial="hidden"
@@ -176,13 +168,20 @@ export default function AboutPage() {
                   </>,
                 ]}
               />
-              <Asterisk className="contact-asterisk" />
             </h2>
             <motion.p className="contact-lede" variants={fadeUp}>
               A project, a question, or just a hello.
               <br />
               I’d love to hear from you.
             </motion.p>
+            <motion.div className="contact-direct" variants={fadeUp}>
+              <a className="closing-email" href={`mailto:${email}`}>
+                {email}
+              </a>
+              <a className="text-link" href={resumeUrl} target="_blank" rel="noreferrer">
+                Résumé (PDF) <Arrow diagonal />
+              </a>
+            </motion.div>
           </div>
           <motion.div className="contact-form-area" variants={fadeUp}>
             <Suspense fallback={<div className="contact-form-loading" />}>

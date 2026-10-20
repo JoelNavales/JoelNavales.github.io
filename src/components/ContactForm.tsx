@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
+import type { FormEvent } from 'react';
 import { useForm, ValidationError } from '@formspree/react';
 import { AnimatePresence, motion } from 'motion/react';
+import { email } from '../data';
 import { easeOut } from '../lib/motion';
 import { Arrow } from './Icons';
 
@@ -22,13 +24,19 @@ const focusOnMount = (node: HTMLElement | null) => {
   node?.focus();
 };
 
+// Our own starter text for the message; only this, never a visitor's draft, gets replaced.
+const starter = (topic?: string) => (topic ? `Hi Joel, I’d like to ask about ${topic}. ` : '');
+
 export default function ContactForm({
   idPrefix = 'contact',
+  topic,
   autoFocus = false,
   onSent,
 }: {
   // Keeps ids unique when the About page form and the quick form are both in the page.
   idPrefix?: string;
+  // A project the visitor asked about: it starts the message and names the email.
+  topic?: string;
   // Focus the first field when the form first appears (the quick form, on desktop).
   autoFocus?: boolean;
   // When given, a successful send clears the form and calls this instead of showing the
@@ -36,17 +44,41 @@ export default function ContactForm({
   onSent?: () => void;
 }) {
   const [state, handleSubmit, reset] = useForm<ContactFields>(FORMSPREE_FORM_ID, {
-    data: { _subject: 'New message from your portfolio' },
+    data: {
+      _subject: topic ? `Re: ${topic}, from your portfolio` : 'New message from your portfolio',
+    },
   });
   const form = useRef<HTMLFormElement>(null);
+  const prefilled = useRef('');
   const formErrors = state.errors?.getFormErrors() ?? [];
+
+  useEffect(() => {
+    const message = form.current?.elements.namedItem('message');
+    if (!(message instanceof HTMLTextAreaElement) || message.value !== prefilled.current) return;
+    message.value = prefilled.current = starter(topic);
+  }, [topic]);
 
   useEffect(() => {
     if (!state.succeeded || !onSent) return;
     form.current?.reset();
+    prefilled.current = '';
     reset();
     onSent();
   }, [state.succeeded, onSent, reset]);
+
+  // `required` lets a field of only spaces through; catch that before it reaches Formspree.
+  function submit(event: FormEvent<HTMLFormElement>) {
+    const fields = ['name', 'message'].map((name) => event.currentTarget.elements.namedItem(name));
+    for (const field of fields) {
+      if (!(field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement)) continue;
+      field.setCustomValidity(field.value.trim() ? '' : 'Please write something here.');
+    }
+    if (!event.currentTarget.reportValidity()) {
+      event.preventDefault();
+      return;
+    }
+    handleSubmit(event);
+  }
 
   const fieldProps = (field: keyof ContactFields) => {
     const invalid = (state.errors?.getFieldErrors(field).length ?? 0) > 0;
@@ -54,6 +86,9 @@ export default function ContactForm({
       id: `${idPrefix}-${field}`,
       name: field,
       required: true,
+      // Clears the "only spaces" message from `submit` as soon as the visitor types.
+      onInput: (event: FormEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+        event.currentTarget.setCustomValidity(''),
       'aria-invalid': invalid || undefined,
       'aria-describedby': invalid ? `${idPrefix}-${field}-error` : undefined,
     };
@@ -76,13 +111,7 @@ export default function ContactForm({
           </button>
         </motion.div>
       ) : (
-        <motion.form
-          key="form"
-          ref={form}
-          className="contact-form"
-          onSubmit={handleSubmit}
-          {...swap}
-        >
+        <motion.form key="form" ref={form} className="contact-form" onSubmit={submit} {...swap}>
           <div className="field">
             <label htmlFor={`${idPrefix}-name`}>Name</label>
             <input {...fieldProps('name')} type="text" autoComplete="name" autoFocus={autoFocus} />
@@ -127,7 +156,7 @@ export default function ContactForm({
           {formErrors.length > 0 && (
             <p className="form-error" role="alert">
               {formErrors.map((error) => error.message.replace(/[.!?]?$/, '.')).join(' ')} You can
-              also email me at <a href="mailto:navales546@gmail.com">navales546@gmail.com</a>.
+              also email me at <a href={`mailto:${email}`}>{email}</a>.
             </p>
           )}
           <button type="submit" className="button button-dark" disabled={state.submitting}>

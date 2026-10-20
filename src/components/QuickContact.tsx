@@ -14,10 +14,13 @@ export function preloadContactForm() {
 // stays mounted, so a half-written message survives closing the panel by accident.
 export default function QuickContact({
   open,
+  topic,
   onClose,
   onSent,
 }: {
   open: boolean;
+  // The project the visitor asked about, if any.
+  topic?: string;
   onClose: () => void;
   onSent: () => void;
 }) {
@@ -86,6 +89,7 @@ export default function QuickContact({
           {/* The first time, the form mounts after the panel opens, so it focuses itself. */}
           <ContactForm
             idPrefix="quick"
+            topic={topic}
             autoFocus={window.matchMedia('(pointer: fine)').matches}
             onSent={onSent}
           />

@@ -6,7 +6,7 @@ Built with **React, Vite, TypeScript, React Router, and CSS**, using **pnpm**. A
 
 ## Pages and motion
 
-- `/`: Home — introduction with a typed greeting and portrait, a sliding toolkit strip, and the project list.
+- `/`: Home — an introduction that starts from the SenSOIL research, the project list, a SenSOIL awards band, and a closing band with email, résumé, and message links.
 - `/work`: Work — projects, project dialogs, and skills.
 - `/about`: About — biography, interactive 3D interests, and contact details. `/about#contact` links directly to contact.
 
@@ -16,9 +16,9 @@ Route changes use a short View Transition crossfade, and each page plays its own
 
 The Home page pairs the introduction with Joel's portrait and a reduced-motion-aware reveal. The About page has an interactive 3D scene drawn in the style of the project illustrations (cel shading and ink outlines), floating directly over the dark page background: a gaming controller for COD and Tekken, a camera for photography, a chess king, and a football. Drag to turn it; tap the controller to rumble and press its buttons, the camera for a flash, the king to tip it, and the ball to kick it. three.js loads as a separate chunk only on the About page, rendering pauses when the scene is off screen, and browsers without WebGL 2 get the original CSS illustration instead.
 
-On the home page, the toolkit strip slides continuously, speeds up as you scroll, and reverses when you scroll back up; it pauses on hover or with its Pause button. Hovering a project in the list shows its cover beside the pointer, and clicking opens the project dialog.
+On the home page, hovering a project in the list shows its cover beside the pointer; on touch screens each row shows the cover inline instead. Clicking opens the project dialog, which leads with the live demo or the code, and its "Ask me about…" button opens the quick message form with the project prefilled.
 
-With a reduced-motion preference, movement is removed (fades remain), the greeting appears without typing, the toolkit strip stands still, the 3D scene renders still and only on demand, and the camera flash is off. The flash is limited to one every 0.8 seconds in any case. Each page has a distinct title and heading; navigation updates keyboard focus and supports browser back/forward with scroll restoration. Previous section links such as `/#work` redirect to the new page on load.
+With a reduced-motion preference, movement is removed (fades remain), the greeting appears without typing, the 3D scene renders still and only on demand, and the camera flash is off. The flash is limited to one every 0.8 seconds in any case. Each page has a distinct title and heading; navigation updates keyboard focus and supports browser back/forward with scroll restoration. Previous section links such as `/#work` redirect to the new page on load.
 
 ## Local development
 
@@ -62,7 +62,7 @@ Open `http://127.0.0.1:4173/my-portfolio/`. Local development with `pnpm dev` an
 
 ## Editing content
 
-- `src/data.ts`: project details, the toolkit, skill groups, and social links.
+- `src/data.ts`: project details (including each project's role line), skill groups, the email and résumé links, and social links.
 - `src/main.tsx`: routes and compatibility with previous section links.
 - `src/App.tsx`: shared header, footer, navigation, page titles, and focus handling.
 - `src/pages/`: Home, Work, and About content.
@@ -72,7 +72,7 @@ Open `http://127.0.0.1:4173/my-portfolio/`. Local development with `pnpm dev` an
 - `src/lib/motion.ts`: shared easing, entrance variants, and scroll-reveal settings.
 - `src/styles.css`: layout, theme, and responsive styles.
 - `src/page-transitions.css`: route transitions and their reduced-motion behavior.
-- `public/assets/`: original concept illustrations and locally hosted fonts, with font licenses.
+- `public/assets/`: concept illustrations, project screenshots, photos, and locally hosted fonts, with font licenses. Add the résumé here as `Joel-Navales-Resume.pdf`.
 - `public/assets/pfp-*.webp` and `pfp-800.jpg`: the Home page portrait at web sizes, made from `pfp.jpg`. To swap the photo, replace `pfp.jpg` and regenerate them:
 
   ```sh
@@ -83,7 +83,7 @@ Open `http://127.0.0.1:4173/my-portfolio/`. Local development with `pnpm dev` an
 
 - `index.html`: page title, description, and sharing metadata.
 
-Project covers are conceptual artwork, not application screenshots. Locker is marked in development and Clario links to its live demo, both with their public repositories. Aspire links to [SE-Aspire](https://github.com/senRyuu286/SE-Aspire), a team-built Flutter career guidance app using Firebase and Gemini; its description credits Joel's interface design and Flutter UI/UX contribution as documented in that repository. There are no invented project metrics, testimonials, or employment details.
+Clario and SteelBound covers are real screenshots; Locker and Aspire covers are concept artwork and are labeled as such. Locker is marked in development and Clario links to its live demo, both with their public repositories. Aspire links to [SE-Aspire](https://github.com/senRyuu286/SE-Aspire), a team-built Flutter career guidance app using Firebase and Gemini; its description credits Joel's interface design and Flutter UI/UX contribution as documented in that repository. There are no invented project metrics, testimonials, or employment details.
 
 ## Contact form
 

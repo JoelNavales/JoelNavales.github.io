@@ -24,11 +24,3 @@ export function Arrow({
     </svg>
   );
 }
-
-export function Asterisk({ className = '' }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 100 100" fill="none" aria-hidden="true">
-      <path d="M50 4v92M4 50h92M17 17l66 66M17 83l66-66" stroke="currentColor" strokeWidth="16" />
-    </svg>
-  );
-}

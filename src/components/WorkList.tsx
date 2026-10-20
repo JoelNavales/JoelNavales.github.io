@@ -9,7 +9,7 @@ import { Arrow } from './Icons';
 const trail = { stiffness: 300, damping: 34, mass: 0.6 };
 
 // Project rows. With a mouse, the hovered project's cover floats beside the pointer and leans
-// into the direction of travel.
+// into the direction of travel; on touch screens, where nothing hovers, each row shows it inline.
 export default function WorkList({
   projects,
   onOpen,
@@ -67,6 +67,15 @@ export default function WorkList({
               }}
             >
               <span className="work-row-number mono">{project.number}</span>
+              <img
+                className="work-row-thumb"
+                src={project.image}
+                alt=""
+                loading="lazy"
+                width="900"
+                height="650"
+                style={{ objectPosition: project.position }}
+              />
               <span className="work-row-title">{project.title}</span>
               <span className="work-row-meta">
                 {project.category} · {project.status}
@@ -89,10 +98,9 @@ export default function WorkList({
           {projects.map((project, index) => (
             <img
               key={project.id}
-              className={project.screenshot ? 'is-screenshot' : undefined}
               src={project.image}
               alt=""
-              style={{ opacity: index === active ? 1 : 0 }}
+              style={{ opacity: index === active ? 1 : 0, objectPosition: project.position }}
             />
           ))}
         </motion.div>
